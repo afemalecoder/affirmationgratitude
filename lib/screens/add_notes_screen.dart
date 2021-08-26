@@ -1,11 +1,12 @@
 import 'package:affirmation_gratitude/model/note_operation.dart';
+import 'package:affirmation_gratitude/screens/quote_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddNoteScreen extends StatefulWidget {
-  static const routeName = '/sddNoteScreen';
+  static const routeName = '/addNoteScreen';
   const AddNoteScreen({Key? key}) : super(key: key);
 
   @override
@@ -35,7 +36,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: IconButton(
-              onPressed: () => Navigator.pushNamed(context, 'home'),
+              onPressed: () =>
+                  Navigator.pushNamed(context, QuoteData.routeName),
               icon: const Icon(Icons.home),
             ),
           ),

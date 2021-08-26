@@ -1,15 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'package:affirmation_gratitude/model/note_operation.dart';
 import 'package:affirmation_gratitude/screens/add_notes_screen.dart';
 import 'package:affirmation_gratitude/screens/affirmation_screen.dart';
+import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
 import 'package:affirmation_gratitude/screens/quote_screen.dart';
 import 'package:affirmation_gratitude/service/affirmation_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
-
-import 'package:affirmation_gratitude/screens/authentication_screen.dart';
 
 import 'config/style.dart';
 

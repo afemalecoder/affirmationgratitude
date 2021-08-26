@@ -1,6 +1,8 @@
 import 'dart:async';
 
-import 'package:affirmation_gratitude/screens/authentication_screen.dart';
+import 'package:affirmation_gratitude/screens/affirmation_screen.dart';
+import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
+import 'package:affirmation_gratitude/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +50,7 @@ class _QuoteDataState extends State<QuoteData> {
               decoration: BoxDecoration(
                 color: Color(0xff464bbd),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/logoPen.png'),
+                  image: AssetImage(logoPen),
                 ),
               ),
               child: Text(''),
@@ -63,7 +65,8 @@ class _QuoteDataState extends State<QuoteData> {
               leading: const Icon(Icons.book),
               title: const Text('My Affirmation'),
               trailing: const Icon(Icons.arrow_forward),
-              onTap: () => Navigator.pushNamed(context, '/affirmation'),
+              onTap: () =>
+                  Navigator.pushNamed(context, AffirmationScreen.routeName),
             ),
             ListTile(
               leading: const Icon(Icons.add_circle),

@@ -1,4 +1,5 @@
 import 'package:affirmation_gratitude/screens/add_notes_screen.dart';
+import 'package:affirmation_gratitude/screens/quote_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,59 +13,66 @@ class AffirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff464bbd),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () => Navigator.pushNamed(
-            context,
-            AddNoteScreen.routeName,
-          ),
-          child: const Icon(
-            Icons.add,
-            size: 30,
-            color: Color(0xff464bbd),
+      backgroundColor: const Color(0xff464bbd),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () => Navigator.pushNamed(
+          context,
+          AddNoteScreen.routeName,
+        ),
+        child: const Icon(
+          Icons.add,
+          size: 30,
+          color: Color(0xff464bbd),
+        ),
+      ),
+      appBar: AppBar(
+        title: const Text('Affirmation'),
+        centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        appBar: AppBar(
-          title: const Text('Affirmation'),
-          centerTitle: true,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 20),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.pushNamed(
+                context,
+                QuoteData.routeName,
+              ),
+              icon: const Icon(Icons.home),
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: IconButton(
-                onPressed: () => Navigator.pushNamed(context, 'home'),
-                icon: const Icon(Icons.home),
-              ),
-            ),
-          ],
-        ),
-        body: Consumer<NotesOperation>(
-          builder: (context, NotesOperation data, child) {
-            return ListView.builder(
-              itemCount: data.getNotes.length,
-              itemBuilder: (context, index) {
-                return NotesCard(data.getNotes[index]);
-              },
-            );
-          },
-        ));
+        ],
+      ),
+      body: Consumer<NotesOperation>(
+        builder: (context, NotesOperation data, child) {
+          return ListView.builder(
+            itemCount: data.getNotes.length,
+            itemBuilder: (context, index) {
+              return NotesCard(
+                data.getNotes[index],
+                key: Key('$index'),
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }
 
 class NotesCard extends StatelessWidget {
-  // const NotesCard({
-  //   Key? key,
-  // }) : super(key: key);
+  const NotesCard(
+    this.note, {
+    Key? key,
+  }) : super(key: key);
 
   final Note note;
-  NotesCard(this.note);
 
   @override
   Widget build(BuildContext context) {
