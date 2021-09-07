@@ -1,5 +1,6 @@
 library authentication;
 
+import 'package:affirmation_gratitude/screens/quoteScreen/quote.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

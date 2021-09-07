@@ -1,5 +1,3 @@
-import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
-import 'package:affirmation_gratitude/screens/quote_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,17 +17,11 @@ class AffirmationAuth with ChangeNotifier {
       debugPrint('$e');
       return;
     }
-    Navigator.of(context).pushReplacementNamed(QuoteData.routeName);
   }
 
   Future<void> logOut(BuildContext context) async {
     try {
       await _auth.signOut();
-      if (_auth.currentUser == null) {
-        Navigator.of(context).pushReplacementNamed(
-          AuthenticationScreen.routeName,
-        );
-      }
     } catch (_) {
       rethrow;
     }

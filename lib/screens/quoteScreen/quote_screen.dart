@@ -1,12 +1,4 @@
-import 'dart:async';
-
-import 'package:affirmation_gratitude/screens/affirmation_screen.dart';
-import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
-import 'package:affirmation_gratitude/utilities/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-
-import 'package:affirmation_gratitude/Data/api_request.dart';
+part of quote;
 
 class QuoteData extends StatefulWidget {
   static const routeName = 'home';
@@ -20,15 +12,15 @@ FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
 class _QuoteDataState extends State<QuoteData> {
   Future<void> _signOut() async {
-    await _firebaseAuth.signOut().then(
-          (value) => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => const AuthenticationScreen(),
-            ),
-            ModalRoute.withName('/auth'),
-          ),
-        );
+    final AffirmationAuth affirmationAuth = context.read<AffirmationAuth>();
+
+    await affirmationAuth.logOut(context);
+
+    if (_firebaseAuth.currentUser == null) {
+      Navigator.of(context).pushReplacementNamed(
+        AuthenticationScreen.routeName,
+      );
+    }
   }
 
   late Future<Quote> futureQuote;
@@ -136,23 +128,34 @@ class _QuoteDataState extends State<QuoteData> {
                   }
                   return const CircularProgressIndicator();
                 }),
-            Container(
-              padding: const EdgeInsets.only(top: 100, bottom: 20),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)))),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/affirmation');
-                },
-                child: const Text(
-                  'Add todays affirmation',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            const AddButton(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AddButton extends StatelessWidget {
+  const AddButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 100, bottom: 20),
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)))),
+        onPressed: () {
+          Navigator.pushNamed(context, '/affirmation');
+        },
+        child: const Text(
+          'Add todays affirmation',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

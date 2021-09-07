@@ -55,6 +55,7 @@ class __FormCardState extends State<_FormCard> {
             email: _email,
             password: _password,
           );
+      Navigator.of(context).pushReplacementNamed(QuoteData.routeName);
     } catch (_) {
       rethrow;
     }

@@ -1,13 +1,9 @@
-import 'package:affirmation_gratitude/model/note_operation.dart';
-import 'package:affirmation_gratitude/screens/quote_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+part of add_affirmation;
 
 class AddNoteScreen extends StatefulWidget {
-  static const routeName = '/addNoteScreen';
   const AddNoteScreen({Key? key}) : super(key: key);
+
+  static const routeName = '/addNoteScreen';
 
   @override
   _AddNoteScreenState createState() => _AddNoteScreenState();
