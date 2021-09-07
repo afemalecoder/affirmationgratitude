@@ -49,7 +49,6 @@ class __FormCardState extends State<_FormCard> {
 
   Future<void> _login() async {
     try {
-      // Provider.of<AffirmationAuth>(context, listen: false)
       await context.read<AffirmationAuth>().login(
             context,
             email: _email,
