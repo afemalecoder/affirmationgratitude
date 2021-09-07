@@ -1,8 +1,9 @@
 part of affirmation;
 
 class AffirmationScreen extends StatelessWidget {
-  static const routeName = '/affirmation';
   const AffirmationScreen({Key? key}) : super(key: key);
+
+  static const routeName = '/affirmation';
 
   @override
   Widget build(BuildContext context) {

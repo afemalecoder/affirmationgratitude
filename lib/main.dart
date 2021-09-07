@@ -8,7 +8,7 @@ import 'package:affirmation_gratitude/model/note_operation.dart';
 import 'package:affirmation_gratitude/screens/add_affirmation/add_affirmation.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
-import 'package:affirmation_gratitude/screens/quoteScreen/quote.dart';
+import 'package:affirmation_gratitude/screens/quote_screen/quote.dart';
 import 'package:affirmation_gratitude/service/affirmation_auth.dart';
 
 import 'config/style.dart';
