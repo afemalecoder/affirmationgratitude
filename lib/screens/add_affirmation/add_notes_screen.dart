@@ -18,6 +18,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff464bbd),
+
+      /// TODO: use the custom app bar
       appBar: AppBar(
         title: const Text('Affirmation'),
         centerTitle: true,
@@ -102,8 +104,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ),
               ),
               onPressed: () async {
-                Provider.of<NotesOperation>(context, listen: false)
-                    .addNewNote(title, content);
                 final User firebaseUser = FirebaseAuth.instance.currentUser!;
                 final notes = FirebaseFirestore.instance;
 

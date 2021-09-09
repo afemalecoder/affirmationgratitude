@@ -1,8 +1,10 @@
 import 'package:affirmation_gratitude/screens/add_Affirmation/add_affirmation.dart';
-import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
-import 'package:affirmation_gratitude/service/affirmation_auth.dart';
-import 'package:affirmation_gratitude/utilities/constants.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
+import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
+import 'package:affirmation_gratitude/screens/home/home.dart';
+import 'package:affirmation_gratitude/screens/quote_screen/quote.dart';
+import 'package:affirmation_gratitude/services/affirmation_auth.dart';
+import 'package:affirmation_gratitude/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +47,13 @@ class _AffirmationDrawerState extends State<AffirmationDrawer> {
             child: SizedBox.shrink(),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () => Navigator.of(context).pop(),
-          ),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              trailing: const Icon(Icons.arrow_forward),
+              onTap: () => Navigator.pushNamed(
+                    context,
+                    HomeScreen.routeName,
+                  )),
           ListTile(
             leading: const Icon(Icons.book),
             title: const Text('My Affirmation'),
@@ -67,7 +71,7 @@ class _AffirmationDrawerState extends State<AffirmationDrawer> {
             leading: const Icon(Icons.save),
             title: const Text('My Quotes'),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, QuoteData.routeName),
           ),
           ListTile(
             leading: const Icon(Icons.settings),

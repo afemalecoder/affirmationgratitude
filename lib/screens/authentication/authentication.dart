@@ -4,7 +4,7 @@ import 'package:affirmation_gratitude/screens/quote_screen/quote.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:affirmation_gratitude/service/affirmation_auth.dart';
+import 'package:affirmation_gratitude/services/affirmation_auth.dart';
 import 'package:affirmation_gratitude/utilities/constants.dart';
 import 'package:affirmation_gratitude/widgets/sizedEmptyScreenSpace.dart';
 

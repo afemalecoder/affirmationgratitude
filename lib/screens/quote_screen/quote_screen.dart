@@ -1,7 +1,7 @@
 part of quote;
 
 class QuoteData extends StatefulWidget {
-  static const routeName = 'home';
+  static const routeName = 'quotes';
 
   const QuoteData({Key? key}) : super(key: key);
   @override
@@ -9,13 +9,6 @@ class QuoteData extends StatefulWidget {
 }
 
 class _QuoteDataState extends State<QuoteData> {
-  late Future<Quote> futureQuote;
-  @override
-  void initState() {
-    super.initState();
-    futureQuote = fetchQuote();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +22,7 @@ class _QuoteDataState extends State<QuoteData> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FutureBuilder<Quote>(
-                future: futureQuote,
+                future: QuotesNetwork().fetchQuote(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
@@ -63,29 +56,41 @@ class AffirmationBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
-          child: Text(
-            '"${quote.quoteText}"',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(12),
+      child: SizedBox(
+        height: 200,
+        width: double.infinity,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: LimitedBox(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '"${quote.quoteText}"',
+                    textAlign: TextAlign.center,
+                    maxLines: 4,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 50.0),
-          child: Text(
-            quote.quoteAuthor,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
