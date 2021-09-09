@@ -21,18 +21,13 @@ class _QuoteDataState extends State<QuoteData> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FutureBuilder<Quote>(
-                future: QuotesNetwork().fetchQuote(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+              Consumer<QuotesNetwork>(
+                builder: (builder, QuotesNetwork network, _) {
+                  if (network.quote == null) {
                     return const CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return const Text('error');
-                  } else if (snapshot.data == null) {
-                    return const Text('There are no qoutes');
                   } else {
                     return AffirmationBody(
-                      quote: snapshot.data!,
+                      quote: network.quote!,
                     );
                   }
                 },
@@ -70,7 +65,6 @@ class AffirmationBody extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

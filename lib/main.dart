@@ -5,6 +5,7 @@ import 'package:affirmation_gratitude/screens/authentication/authentication.dart
 import 'package:affirmation_gratitude/screens/home/home.dart';
 import 'package:affirmation_gratitude/screens/quote_screen/quote.dart';
 import 'package:affirmation_gratitude/services/affirmation_auth.dart';
+import 'package:affirmation_gratitude/services/quotes_network.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,27 +34,45 @@ class MyApp extends StatelessWidget {
         ),
         ListenableProvider<AffirmationAuth>(
           create: (BuildContext context) => AffirmationAuth(),
-        )
-      ],
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Palette.kcToLight,
-          textTheme: GoogleFonts.latoTextTheme(
-            Theme.of(context).textTheme,
-          ),
         ),
-        home: FirebaseAuth.instance.currentUser == null
-            ? const AuthenticationScreen()
-            : const HomeScreen(),
-        routes: {
-          QuoteData.routeName: (context) => const QuoteData(),
-          AuthenticationScreen.routeName: (context) =>
-              const AuthenticationScreen(),
-          AffirmationScreen.routeName: (context) => const AffirmationScreen(),
-          AddNoteScreen.routeName: (context) => const AddNoteScreen(),
-          HomeScreen.routeName: (context) => const HomeScreen(),
-        },
+        ListenableProvider<QuotesNetwork>(
+          create: (BuildContext context) => QuotesNetwork.instance,
+        ),
+      ],
+      child: const _APP(),
+    );
+  }
+}
+
+class _APP extends StatelessWidget {
+  const _APP({Key? key}) : super(key: key);
+
+  Future<void> getQuotes(BuildContext context) async {
+    final QuotesNetwork network = context.read<QuotesNetwork>();
+    if (network.quote == null) await network.getQuote();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    getQuotes(context);
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Palette.kcToLight,
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const AuthenticationScreen()
+          : const HomeScreen(),
+      routes: {
+        QuoteData.routeName: (context) => const QuoteData(),
+        AuthenticationScreen.routeName: (context) =>
+            const AuthenticationScreen(),
+        AffirmationScreen.routeName: (context) => const AffirmationScreen(),
+        AddNoteScreen.routeName: (context) => const AddNoteScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
+      },
     );
   }
 }

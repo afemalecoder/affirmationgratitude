@@ -41,29 +41,40 @@ class WelcomeText extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          Text(
+          const Text(
             'afemalecoder',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
             ),
           ),
           const SizedBox(height: 10.0),
-          FutureBuilder<Quote>(
-            future: QuotesNetwork().fetchQuote(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+          Consumer<QuotesNetwork>(
+            builder: (builder, QuotesNetwork network, _) {
+              if (network.quote == null) {
                 return const CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return const Text('error');
-              } else if (snapshot.data == null) {
-                return const Text('There are no qoutes');
               } else {
                 return AffirmationBody(
-                  quote: snapshot.data!,
+                  quote: network.quote!,
                 );
               }
             },
           ),
+          // FutureBuilder<Quote>(
+          //   future: QuotesNetwork().fetchQuote(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const CircularProgressIndicator();
+          //     } else if (snapshot.hasError) {
+          //       return const Text('error');
+          //     } else if (snapshot.data == null) {
+          //       return const Text('There are no qoutes');
+          //     } else {
+          //       return AffirmationBody(
+          //         quote: snapshot.data!,
+          //       );
+          //     }
+          //   },
+          // ),
         ],
       ),
     );
