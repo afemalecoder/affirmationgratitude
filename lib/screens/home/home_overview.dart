@@ -6,23 +6,35 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       drawer: AffirmationDrawer(),
       appBar: AffirmationAppBar(
         elevation: 0,
         showDrawer: true,
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: const Color(0xff464bbd),
-      body: Center(
-        child: WelcomeText(),
+      body: CustomPaint(
+        painter: _BackgroundCustomPaint(),
+        child: SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            children: [
+              HomeHeader(),
+              HomeCategoryCard(
+                  title: 'Affirmations', subtitle: 'See all your affirmations'),
+              HomeCategoryCard(
+                  title: 'Quotes', subtitle: 'Read from the daily quotes'),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-class WelcomeText extends StatelessWidget {
-  const WelcomeText({
+class HomeBody extends StatelessWidget {
+  const HomeBody({
     Key? key,
   }) : super(key: key);
 
@@ -31,10 +43,10 @@ class WelcomeText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'WELCOME',
+            'Hello Matilda',
             style: TextStyle(
               fontSize: 45,
               fontWeight: FontWeight.bold,
@@ -42,39 +54,23 @@ class WelcomeText extends StatelessWidget {
             ),
           ),
           const Text(
-            'afemalecoder',
+            'Date 13/09/2021',
             style: TextStyle(
               color: Colors.white,
             ),
           ),
           const SizedBox(height: 10.0),
           Consumer<QuotesNetwork>(
-            builder: (builder, QuotesNetwork network, _) {
-              if (network.quote == null) {
+            builder: (builder, QuotesNetwork data, _) {
+              if (data.quote == null) {
                 return const CircularProgressIndicator();
               } else {
                 return AffirmationBody(
-                  quote: network.quote!,
+                  quote: data.quote!,
                 );
               }
             },
           ),
-          // FutureBuilder<Quote>(
-          //   future: QuotesNetwork().fetchQuote(),
-          //   builder: (context, snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return const CircularProgressIndicator();
-          //     } else if (snapshot.hasError) {
-          //       return const Text('error');
-          //     } else if (snapshot.data == null) {
-          //       return const Text('There are no qoutes');
-          //     } else {
-          //       return AffirmationBody(
-          //         quote: snapshot.data!,
-          //       );
-          //     }
-          //   },
-          // ),
         ],
       ),
     );

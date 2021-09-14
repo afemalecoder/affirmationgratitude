@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AffirmationAuth(),
         ),
         ListenableProvider<QuotesNetwork>(
-          create: (BuildContext context) => QuotesNetwork.instance,
+          create: (BuildContext context) => QuotesNetwork(),
         ),
       ],
       child: const _APP(),

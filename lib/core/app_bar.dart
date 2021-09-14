@@ -20,7 +20,7 @@ class AffirmationAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: backgroundColor,
-      title: showDrawer ? SizedBox.shrink() : const Text('Affirmation'),
+      title: showDrawer ? const SizedBox.shrink() : const Text('Affirmation'),
       elevation: elevation,
       centerTitle: true,
       leading: showDrawer
@@ -36,7 +36,7 @@ class AffirmationAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: showDrawer
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : IconButton(
                   onPressed: () => Navigator.pushNamed(
                     context,

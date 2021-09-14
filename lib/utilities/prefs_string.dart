@@ -1,6 +1,6 @@
 class PrefsString {
   const PrefsString._();
-  static const String quoteAuthor = 'qoute_author';
-  static const String quoteText = 'qoute_text';
-  static const String quoteDate = 'qoute_date';
+  static const String quoteAuthor = 'quote_author';
+  static const String quoteText = 'quote_text';
+  static const String quoteDate = 'quote_date';
 }

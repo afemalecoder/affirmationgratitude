@@ -7,16 +7,19 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QuotesNetwork with ChangeNotifier {
-  QuotesNetwork._();
-  static QuotesNetwork instance = QuotesNetwork._();
+  QuotesNetwork();
+
   Quote? quote;
+
   final String _baseUrlAPI = 'https://favqs.com/api';
 
-  ///
   Future<void> cacheQuote(Quote quote) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     await prefs.setString(PrefsString.quoteAuthor, quote.quoteAuthor);
+
     await prefs.setString(PrefsString.quoteText, quote.quoteText);
+
     await prefs.setString(PrefsString.quoteDate, quote.quoteDate);
   }
 
@@ -36,17 +39,6 @@ class QuotesNetwork with ChangeNotifier {
       quote = Quote.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
       await cacheQuote(quote!);
       notifyListeners();
-    } else {
-      throw Exception('Failed to load quote');
-    }
-  }
-
-  /// Get random quote from the API
-  Future<Quote> getRandomQuote() async {
-    final Response response = await _getQuote();
-
-    if (response.statusCode == 200) {
-      return Quote.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       throw Exception('Failed to load quote');
     }
