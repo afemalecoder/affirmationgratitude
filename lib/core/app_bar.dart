@@ -1,4 +1,4 @@
-import 'package:affirmation_gratitude/screens/quote_screen/quote.dart';
+import 'package:affirmation_gratitude/screens/quote/quote.dart';
 import 'package:flutter/material.dart';
 
 class AffirmationAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -40,7 +40,7 @@ class AffirmationAppBar extends StatelessWidget implements PreferredSizeWidget {
               : IconButton(
                   onPressed: () => Navigator.pushNamed(
                     context,
-                    QuoteData.routeName,
+                    QuoteScreen.routeName,
                   ),
                   icon: const Icon(Icons.home),
                 ),

@@ -7,8 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AffirmationDrawer(),
-      appBar: AffirmationAppBar(
+      appBar: const AffirmationAppBar(
         elevation: 0,
         showDrawer: true,
         backgroundColor: Colors.transparent,
@@ -19,12 +18,18 @@ class HomeScreen extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
           child: Column(
-            children: [
+            children: const <Widget>[
               HomeHeader(),
+              Spacer(),
               HomeCategoryCard(
-                  title: 'Affirmations', subtitle: 'See all your affirmations'),
+                title: 'Affirmations',
+                subtitle: 'See all your affirmations',
+              ),
               HomeCategoryCard(
-                  title: 'Quotes', subtitle: 'Read from the daily quotes'),
+                title: 'Quotes',
+                subtitle: 'Read from the daily quotes',
+              ),
+              SizedBox(height: 40),
             ],
           ),
         ),

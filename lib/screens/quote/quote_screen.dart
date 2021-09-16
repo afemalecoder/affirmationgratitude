@@ -1,19 +1,18 @@
 part of quote;
 
-class QuoteData extends StatefulWidget {
+class QuoteScreen extends StatefulWidget {
   static const routeName = 'quotes';
 
-  const QuoteData({Key? key}) : super(key: key);
+  const QuoteScreen({Key? key}) : super(key: key);
   @override
-  _QuoteDataState createState() => _QuoteDataState();
+  _QuoteScreenState createState() => _QuoteScreenState();
 }
 
-class _QuoteDataState extends State<QuoteData> {
+class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: const AffirmationDrawer(),
       backgroundColor: const Color(0xff464bbd),
       body: Center(
         child: Padding(

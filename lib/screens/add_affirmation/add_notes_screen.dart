@@ -35,7 +35,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             padding: const EdgeInsets.only(right: 20),
             child: IconButton(
               onPressed: () =>
-                  Navigator.pushNamed(context, QuoteData.routeName),
+                  Navigator.pushNamed(context, QuoteScreen.routeName),
               icon: const Icon(Icons.home),
             ),
           ),

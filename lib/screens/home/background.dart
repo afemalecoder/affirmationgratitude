@@ -1,44 +1,79 @@
 part of home;
 
+/// This is the decoration background for the home screen.
+///
+/// To use it, the parent widget in the [Scaffold] (widget present in the body)
+/// should be wrapped in [CustomPaint] and, [BackgroundCustomPaint] assigned to
+/// the parameter named "[painter]" in the [CustomPaint] Widget itself.
+///
+/// Steps taken when drawing the shapes
+/// 1. Define the instruction of the shape you desire using [Path]
+/// 2. Assign properties eg. color or style by calling [Paint]
+/// 3. Call [Canvas] and pass in the [Path] and [Paint] to draw
 class _BackgroundCustomPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
+    const Color overlayColor = Color(0xffC1C8FF);
+    const Color filledColor = Color(0xffECEFFF);
+
+    const double overlayRadius = 32;
+    const double strokeWidth = 6;
     final height = size.height;
     final width = size.width;
-    Paint paint = Paint();
 
-    Path mainBackground = Path();
-    Path ovalPath = Path();
+    final Path filledCircleDeco = Path();
+    final Path filledBackgroundDeco = Path();
+    final Path strokedDeco = Path();
 
-    mainBackground.addRect(Rect.fromLTRB(0, 0, width, height));
-    paint.color = Colors.white;
-    canvas.drawPath(mainBackground, paint);
+    /// ============== START Stroked Circle ==============
+    strokedDeco.addOval(
+      Rect.fromCircle(
+        center: Offset(width * 0.95, -50),
+        radius: 100,
+      ),
+    );
+    // cascade operators
+    final strokedCirclePaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..color = overlayColor;
 
-    ovalPath.moveTo(0, height * 0.43);
+    canvas.drawPath(strokedDeco, strokedCirclePaint);
 
-    // ovalPath.addRRect()
-
-    // Paints a curve from current position to the center
-    // The curve turning point is at 36% of height
-    // The curve ends at the same height as the start point
-    ovalPath.quadraticBezierTo(
-      width * 0.5,
-      height * 0.2,
-      width * width,
-      height * 0.33,
+    /// ============== END Stroked shape ==============
+    ///
+    /// ============== START Filled Circle ==============
+    filledCircleDeco.addOval(
+      Rect.fromCircle(
+        center: Offset(width * 0.1, -50),
+        radius: 100,
+      ),
     );
 
-    // Paint a line from current position to bottom of screen
-    ovalPath.quadraticBezierTo(width, height, width, height);
+    final filledCirclePaint = Paint()
+      ..color = filledColor
+      ..style = PaintingStyle.fill;
+    canvas.drawPath(filledCircleDeco, filledCirclePaint);
 
-    // draw remaining line to bottom left side
-    ovalPath.lineTo(0, height);
+    /// ============== END Filled Circle ==============
+    ///
+    /// ============== START Background Overlay ==============
+    filledBackgroundDeco.addRRect(
+      RRect.fromRectAndCorners(
+        Rect.fromPoints(
+          Offset(width, height),
+          Offset(0, height * 0.25),
+        ),
+        topLeft: const Radius.circular(overlayRadius),
+        topRight: const Radius.circular(overlayRadius),
+      ),
+    );
+    final filledBackgroundPaint = Paint()
+      ..color = overlayColor
+      ..style = PaintingStyle.fill;
+    canvas.drawPath(filledBackgroundDeco, filledBackgroundPaint);
 
-    // Close line to reset it back
-    ovalPath.close();
-
-    paint.color = const Color(0xffC1C8FF);
-    canvas.drawPath(ovalPath, paint);
+    /// ============== END Background Overlay ==============
   }
 
   @override

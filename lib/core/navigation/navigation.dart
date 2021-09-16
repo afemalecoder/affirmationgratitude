@@ -1,7 +1,9 @@
 library navigation;
 
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:affirmation_gratitude/screens/home/home.dart';
+import 'package:affirmation_gratitude/screens/profile/profile.dart';
+import 'package:affirmation_gratitude/screens/quote/quote.dart';
+import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
