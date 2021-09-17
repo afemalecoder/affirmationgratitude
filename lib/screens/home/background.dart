@@ -28,7 +28,7 @@ class _BackgroundCustomPaint extends CustomPainter {
     /// ============== START Stroked Circle ==============
     strokedDeco.addOval(
       Rect.fromCircle(
-        center: Offset(width * 0.95, -50),
+        center: Offset(width * 0.95, 0),
         radius: 100,
       ),
     );
@@ -36,7 +36,7 @@ class _BackgroundCustomPaint extends CustomPainter {
     final strokedCirclePaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..color = overlayColor;
+      ..color = filledColor;
 
     canvas.drawPath(strokedDeco, strokedCirclePaint);
 
@@ -45,8 +45,8 @@ class _BackgroundCustomPaint extends CustomPainter {
     /// ============== START Filled Circle ==============
     filledCircleDeco.addOval(
       Rect.fromCircle(
-        center: Offset(width * 0.1, -50),
-        radius: 100,
+        center: Offset(width * 0.1, 0),
+        radius: 150,
       ),
     );
 
@@ -57,23 +57,23 @@ class _BackgroundCustomPaint extends CustomPainter {
 
     /// ============== END Filled Circle ==============
     ///
-    /// ============== START Background Overlay ==============
-    filledBackgroundDeco.addRRect(
-      RRect.fromRectAndCorners(
-        Rect.fromPoints(
-          Offset(width, height),
-          Offset(0, height * 0.25),
-        ),
-        topLeft: const Radius.circular(overlayRadius),
-        topRight: const Radius.circular(overlayRadius),
-      ),
-    );
-    final filledBackgroundPaint = Paint()
-      ..color = overlayColor
-      ..style = PaintingStyle.fill;
-    canvas.drawPath(filledBackgroundDeco, filledBackgroundPaint);
+    // /// ============== START Background Overlay ==============
+    // filledBackgroundDeco.addRRect(
+    //   RRect.fromRectAndCorners(
+    //     Rect.fromPoints(
+    //       Offset(width, height),
+    //       Offset(0, height * 0.20),
+    //     ),
+    //     topLeft: const Radius.circular(overlayRadius),
+    //     topRight: const Radius.circular(overlayRadius),
+    //   ),
+    // );
+    // final filledBackgroundPaint = Paint()
+    //   ..color = overlayColor
+    //   ..style = PaintingStyle.fill;
+    // canvas.drawPath(filledBackgroundDeco, filledBackgroundPaint);
 
-    /// ============== END Background Overlay ==============
+    // /// ============== END Background Overlay ==============
   }
 
   @override

@@ -12,6 +12,7 @@ class _FormCard extends StatefulWidget {
 class __FormCardState extends State<_FormCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
+  String _name = '';
   String _email = '';
   String _password = '';
 
@@ -54,7 +55,8 @@ class __FormCardState extends State<_FormCard> {
             email: _email,
             password: _password,
           );
-      Navigator.of(context).pushReplacementNamed(QuoteScreen.routeName);
+      Navigator.of(context)
+          .pushReplacementNamed(AffirmationNavigation.routeName);
     } catch (_) {
       rethrow;
     }
@@ -64,9 +66,12 @@ class __FormCardState extends State<_FormCard> {
     try {
       await context.read<AffirmationAuth>().signUp(
             context,
+            displayName: _name,
             email: _email,
             password: _password,
           );
+      Navigator.of(context)
+          .pushReplacementNamed(AffirmationNavigation.routeName);
     } catch (_) {
       rethrow;
     }
@@ -97,6 +102,20 @@ class __FormCardState extends State<_FormCard> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  if (!isLogin)
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Username',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 5) {
+                          return 'Username is too short';
+                        }
+                      },
+                      onSaved: (value) {
+                        _name = value!;
+                      },
+                    ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'E-mail'),
                     keyboardType: TextInputType.emailAddress,

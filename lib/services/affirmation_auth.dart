@@ -1,3 +1,4 @@
+import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ class AffirmationAuth with ChangeNotifier {
 
   Future<void> signUp(
     BuildContext context, {
+    required String displayName,
     required String email,
     required String password,
   }) async {
@@ -37,7 +39,9 @@ class AffirmationAuth with ChangeNotifier {
         email: email,
         password: password,
       );
-      await _createCloudFirestoreUser(newUser);
+      await _auth.currentUser!.updateDisplayName(displayName);
+
+      await _createCloudFirestoreUser(newUser, displayName);
 
       await login(context, email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -46,10 +50,14 @@ class AffirmationAuth with ChangeNotifier {
     }
   }
 
-  Future<void> _createCloudFirestoreUser(UserCredential newUser) async {
+  Future<void> _createCloudFirestoreUser(
+    UserCredential newUser,
+    String displayName,
+  ) async {
     await _db.collection('users').add(<String, dynamic>{
       'uid': newUser.user!.uid,
       'email': newUser.user!.email,
+      'displayname': displayName,
     });
   }
 }

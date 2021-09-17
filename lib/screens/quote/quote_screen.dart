@@ -1,7 +1,7 @@
 part of quote;
 
 class QuoteScreen extends StatefulWidget {
-  static const routeName = 'quotes';
+  static const routeName = '/quotes';
 
   const QuoteScreen({Key? key}) : super(key: key);
   @override

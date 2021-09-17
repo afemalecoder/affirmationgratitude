@@ -9,10 +9,7 @@ class FloatingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Colors.white,
-      onPressed: () => Navigator.pushNamed(
-        context,
-        AddNoteScreen.routeName,
-      ),
+      onPressed: () {},
       child: const Icon(
         Icons.add,
         size: 30,

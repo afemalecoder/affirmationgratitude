@@ -1,9 +1,9 @@
 part of navigation;
 
 class AffirmationNavigation extends StatefulWidget {
-  const AffirmationNavigation();
+  const AffirmationNavigation({Key? key}) : super(key: key);
 
-  static const String route = '/home';
+  static const String routeName = '/navigation';
 
   @override
   _AffirmationNavigationState createState() => _AffirmationNavigationState();
@@ -39,6 +39,7 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
         child: screens[currentIndex],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xff8793FA),
         child: const Icon(
           Icons.add,
           size: 45,
@@ -87,7 +88,8 @@ class AffirNavigationBar extends StatelessWidget {
         fontSize: 12,
         color: Theme.of(context).colorScheme.secondaryVariant,
       ),
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: const Color(0xffC1C8FF),
+      selectedItemColor: const Color(0xff8793FA),
       currentIndex: currentIndex,
       onTap: onTap,
     );

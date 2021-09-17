@@ -18,11 +18,13 @@ import 'config/style.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-      overlays: <SystemUiOverlay>[
-        SystemUiOverlay.top,
-        SystemUiOverlay.bottom,
-      ]);
+
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: <SystemUiOverlay>[
+      SystemUiOverlay.top,
+    ],
+  );
 
   await Firebase.initializeApp();
 
@@ -71,10 +73,16 @@ class _APP extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: FirebaseAuth.instance.currentUser == null
-          ? const AuthenticationScreen()
-          : const AffirmationNavigation(),
+      home: StreamBuilder<User?>(
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          return FirebaseAuth.instance.currentUser == null
+              ? const AuthenticationScreen()
+              : const AffirmationNavigation();
+        },
+      ),
       routes: {
+        AffirmationNavigation.routeName: (context) =>
+            const AffirmationNavigation(),
         QuoteScreen.routeName: (context) => const QuoteScreen(),
         AuthenticationScreen.routeName: (context) =>
             const AuthenticationScreen(),

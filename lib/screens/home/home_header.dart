@@ -5,21 +5,33 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String username = 'Matilda';
-    return Column(
-      children: <Widget>[
-        const Text(
-          'Hello $username',
-          style: TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.w700,
-            color: Color(0xffC1C8FF),
-          ),
+    final String username = FirebaseAuth.instance.currentUser!.displayName!;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Hello \n$username',
+              maxLines: 2,
+              overflow: TextOverflow.fade,
+              style: const TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.w900,
+                color: Color(0xff8793FA),
+              ),
+            ),
+            Text(
+              'Date ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
+              style: const TextStyle(
+                color: Color(0xffC1C8FF),
+              ),
+            ),
+          ],
         ),
-        Text(
-          'Date ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
-        ),
-      ],
+      ),
     );
   }
 }
