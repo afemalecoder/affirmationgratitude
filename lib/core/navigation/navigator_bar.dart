@@ -45,7 +45,8 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
           size: 45,
           color: Color(0xffffffff),
         ),
-        onPressed: () {},
+        onPressed: () =>
+            Navigator.of(context).pushNamed(AddNoteScreen.routeName),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AffirNavigationBar(
@@ -74,7 +75,8 @@ class AffirNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.note), label: 'Affirmation'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.library_books), label: 'Affirmation'),
         BottomNavigationBarItem(icon: SizedBox.shrink(), label: ''),
         BottomNavigationBarItem(icon: Icon(Icons.format_quote), label: 'Quote'),
         BottomNavigationBarItem(icon: Icon(Icons.person_pin), label: 'Profile'),

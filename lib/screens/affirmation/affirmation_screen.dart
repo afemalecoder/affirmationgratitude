@@ -8,16 +8,36 @@ class AffirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AffirmationAppBar(),
-      floatingActionButton: const FloatingButton(),
-      backgroundColor: const Color(0xff464bbd),
-      body: Consumer<NotesOperation>(
-        builder: (context, NotesOperation data, child) {
+      appBar: AppBar(
+        elevation: 0,
+        title: const Padding(
+          padding: EdgeInsets.all(12),
+          child: Text(
+            'Affirmation',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 25,
+            ),
+          ),
+        ),
+        backgroundColor: const Color(0xff8A96F6),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))),
+      ),
+      body: Consumer<AffirmationOperation>(
+        builder: (context, AffirmationOperation data, child) {
           return ListView.builder(
-            itemCount: data.getNotes.length,
+            itemCount: data.notes.length,
             itemBuilder: (context, index) {
-              return NotesCard(
-                data.getNotes[index],
+              return AffirmationCard(
+                data.notes[index],
                 key: Key('$index'),
               );
             },

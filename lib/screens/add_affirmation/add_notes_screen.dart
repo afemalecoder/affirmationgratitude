@@ -11,15 +11,13 @@ class AddNoteScreen extends StatefulWidget {
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
   late String title;
-
+  late String mood;
   late String content;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff464bbd),
-
-      /// TODO: use the custom app bar
       appBar: AppBar(
         title: const Text('Affirmation'),
         centerTitle: true,
@@ -67,7 +65,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 color: Colors.white,
               ),
               onChanged: (value) {
-                title = value;
+                setState(() => title = value);
               },
             ),
             const SizedBox(
@@ -91,7 +89,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   ),
                 ),
                 onChanged: (value) {
-                  content = value;
+                  setState(() => content = value);
                 },
               ),
             ),
@@ -104,18 +102,12 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ),
               ),
               onPressed: () async {
-                final User firebaseUser = FirebaseAuth.instance.currentUser!;
-                final notes = FirebaseFirestore.instance;
-
-                await notes
-                    .collection('notes/${firebaseUser.uid}/notes')
-                    .add({'title': title, 'content': content});
-
-                // final noteCollection = FirebaseFirestore.instance;
-                // await noteCollection
-                //     .collection('notes/${firebaseUser.uid}/notes')
-                //     .add({'title': title, 'content': content});
-
+                context.read<AffirmationOperation>().addNewNote(
+                      date: DateTime.now().toString(),
+                      title: title,
+                      content: content,
+                      mood: 'Happy',
+                    );
                 Navigator.pop(context);
               },
               child: const Text(

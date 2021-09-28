@@ -1,5 +1,5 @@
+import 'package:affirmation_gratitude/core/affirmation_operation.dart';
 import 'package:affirmation_gratitude/core/navigation/navigation.dart';
-import 'package:affirmation_gratitude/core/note_operation.dart';
 import 'package:affirmation_gratitude/screens/add_affirmation/add_affirmation.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
@@ -19,13 +19,6 @@ import 'config/style.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: <SystemUiOverlay>[
-      SystemUiOverlay.top,
-    ],
-  );
-
   await Firebase.initializeApp();
 
   runApp(const MyApp());
@@ -40,8 +33,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ListenableProvider<NotesOperation>(
-          create: (BuildContext context) => NotesOperation(),
+        ListenableProvider<AffirmationOperation>(
+          create: (BuildContext context) => AffirmationOperation(),
         ),
         ListenableProvider<AffirmationAuth>(
           create: (BuildContext context) => AffirmationAuth(),
