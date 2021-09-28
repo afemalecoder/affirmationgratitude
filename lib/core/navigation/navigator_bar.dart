@@ -21,40 +21,43 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
       QuoteScreen(),
       ProfileScreen(),
     ];
-    return Scaffold(
-      body: PageTransitionSwitcher(
-        duration: const Duration(milliseconds: 400),
-        transitionBuilder: (
-          Widget child,
-          Animation<double> primary,
-          Animation<double> secondary,
-        ) {
-          return SharedAxisTransition(
-            animation: primary,
-            secondaryAnimation: secondary,
-            transitionType: SharedAxisTransitionType.vertical,
-            child: child,
-          );
-        },
-        child: screens[currentIndex],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xff8793FA),
-        child: const Icon(
-          Icons.add,
-          size: 45,
-          color: Color(0xffffffff),
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 400),
+          transitionBuilder: (
+            Widget child,
+            Animation<double> primary,
+            Animation<double> secondary,
+          ) {
+            return SharedAxisTransition(
+              animation: primary,
+              secondaryAnimation: secondary,
+              transitionType: SharedAxisTransitionType.vertical,
+              child: child,
+            );
+          },
+          child: screens[currentIndex],
         ),
-        onPressed: () =>
-            Navigator.of(context).pushNamed(AddNoteScreen.routeName),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AffirNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (int screenIndex) {
-          if (screenIndex == 2) return;
-          setState(() => currentIndex = screenIndex);
-        },
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xff8793FA),
+          child: const Icon(
+            Icons.add,
+            size: 45,
+            color: Color(0xffffffff),
+          ),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(AddNoteScreen.routeName),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: AffirNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (int screenIndex) {
+            if (screenIndex == 2) return;
+            setState(() => currentIndex = screenIndex);
+          },
+        ),
       ),
     );
   }

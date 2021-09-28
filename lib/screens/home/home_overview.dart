@@ -35,8 +35,14 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         HomeCategoryCard(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(AffirmationScreen.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const AffirmationScreen(
+                                  showBackButton: true,
+                                ),
+                              ),
+                            );
                           },
                           title: 'Affirmations',
                           subtitle: 'See all your affirmations',
