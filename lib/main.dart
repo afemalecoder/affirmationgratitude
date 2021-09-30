@@ -14,8 +14,6 @@ import 'package:affirmation_gratitude/screens/quote/quote.dart';
 import 'package:affirmation_gratitude/services/affirmation_auth.dart';
 import 'package:affirmation_gratitude/services/quotes_network.dart';
 
-import 'config/style.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -60,12 +58,6 @@ class _APP extends StatelessWidget {
   Widget build(BuildContext context) {
     getQuotes(context);
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Palette.kcToLight,
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
       home: StreamBuilder<User?>(
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
           return FirebaseAuth.instance.currentUser == null
