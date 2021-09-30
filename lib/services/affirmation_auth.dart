@@ -15,8 +15,7 @@ class AffirmationAuth with ChangeNotifier {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      debugPrint('$e');
-      return;
+      rethrow;
     }
   }
 
@@ -45,7 +44,6 @@ class AffirmationAuth with ChangeNotifier {
 
       await login(context, email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      debugPrint('$e');
       rethrow;
     }
   }
