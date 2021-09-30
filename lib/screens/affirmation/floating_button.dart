@@ -8,12 +8,12 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.white,
+      backgroundColor: lightThemeData.floatingActionButtonTheme.backgroundColor,
       onPressed: () {},
-      child: const Icon(
+      child: Icon(
         Icons.add,
         size: 30,
-        color: Color(0xff464bbd),
+        color: lightThemeData.colorScheme.error,
       ),
     );
   }

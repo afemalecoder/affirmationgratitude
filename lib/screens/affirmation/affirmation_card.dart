@@ -16,7 +16,7 @@ class AffirmationCard extends StatelessWidget {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xFF8A96F6),
+        color: lightThemeData.colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
@@ -34,10 +34,10 @@ class AffirmationCard extends StatelessWidget {
                       maxLines: 1,
                       softWrap: false,
                       overflow: TextOverflow.fade,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFFFFFFFF),
+                        color: lightThemeData.colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -46,7 +46,8 @@ class AffirmationCard extends StatelessWidget {
                   'Date: ${DateFormat.yMMMMd().format(
                     DateTime.parse(affirmation.date),
                   )}',
-                  style: Theme.of(context).textTheme.caption,
+                  style: TextStyle(
+                      color: lightThemeData.colorScheme.primaryVariant),
                 ),
                 const SizedBox(height: 5),
                 Flexible(
@@ -55,9 +56,9 @@ class AffirmationCard extends StatelessWidget {
                     maxLines: 2,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 17,
-                      color: Color(0xFFFFFFFF),
+                      color: lightThemeData.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -83,7 +84,7 @@ class AffirmationMood extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       const MoodHelper().getIcon(label),
-      color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+      color: lightThemeData.colorScheme.primaryVariant,
       size: 42,
     );
   }

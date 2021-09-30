@@ -17,16 +17,16 @@ class HomeHeader extends StatelessWidget {
               'Hello \n$username',
               maxLines: 2,
               overflow: TextOverflow.fade,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.w900,
-                color: Color(0xff8793FA),
+                color: lightThemeData.colorScheme.primary,
               ),
             ),
             Text(
               'Date ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
-              style: const TextStyle(
-                color: Color(0xffC1C8FF),
+              style: TextStyle(
+                color: lightThemeData.colorScheme.onBackground,
               ),
             ),
           ],

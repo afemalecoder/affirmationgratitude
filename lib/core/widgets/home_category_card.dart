@@ -1,3 +1,4 @@
+import 'package:affirmation_gratitude/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeCategoryCard extends StatelessWidget {
@@ -18,15 +19,15 @@ class HomeCategoryCard extends StatelessWidget {
       height: 200,
       width: double.infinity,
       child: Card(
-        color: const Color(0xff8793FA),
+        color: lightThemeData.colorScheme.surface,
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-        shadowColor: const Color(0xffC1C8FF),
+        shadowColor: lightThemeData.cardTheme.shadowColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: InkWell(
-          splashColor: const Color(0xffC1C8FF),
+          splashColor: lightThemeData.colorScheme.primary,
           highlightColor: Colors.transparent,
           borderRadius: BorderRadius.circular(20),
           onTap: onTap,

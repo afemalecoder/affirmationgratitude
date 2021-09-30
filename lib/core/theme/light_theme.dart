@@ -1,28 +1,28 @@
 part of theme;
 
 final ThemeData lightThemeData = ThemeData(
-  primarySwatch: Colors.teal,
-  primaryColorDark: const Color.fromRGBO(0, 121, 107, 1.0),
+  primarySwatch: Colors.indigo,
+  primaryColorDark: const Color.fromRGBO(107, 119, 247, 1.0),
   textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: Color.fromRGBO(0, 150, 136, 1.0),
+    cursorColor: Color.fromRGBO(255, 255, 255, 1.0),
   ),
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
-    primary: Color.fromRGBO(0, 150, 136, 1.0),
-    primaryVariant: Color.fromRGBO(0, 121, 107, 1.0),
-    secondary: Color.fromRGBO(176, 190, 197, 1.0),
-    secondaryVariant: Color.fromRGBO(69, 90, 100, 1.0),
+    primary: Color.fromRGBO(107, 119, 247, 1.0),
+    primaryVariant: Color.fromRGBO(193, 200, 255, 1.0),
+    secondary: Color.fromRGBO(107, 119, 247, 1),
+    secondaryVariant: Color.fromRGBO(219, 222, 253, 1.0),
     background: Color.fromRGBO(255, 255, 255, 1.0),
-    surface: Color.fromRGBO(255, 255, 255, 1.0),
+    surface: Color.fromRGBO(138, 150, 246, 1.0),
     error: Color.fromRGBO(176, 0, 32, 1.0),
     onPrimary: Color.fromRGBO(255, 255, 255, 1.0),
-    onSecondary: Color.fromRGBO(0, 0, 0, 1.0),
-    onBackground: Color.fromRGBO(0, 0, 0, 1.0),
-    onSurface: Color.fromRGBO(0, 0, 0, 1.0),
+    onSecondary: Color.fromRGBO(255, 255, 255, 1.0),
+    onBackground: Color.fromRGBO(135, 147, 250, 1.0),
+    onSurface: Color.fromRGBO(255, 255, 255, 1.0),
     onError: Color.fromRGBO(255, 255, 255, 1.0),
   ),
   appBarTheme: const AppBarTheme(
-    color: Color.fromRGBO(0, 150, 136, 1.0),
+    color: Color.fromRGBO(107, 119, 247, 1.0),
   ),
   bottomSheetTheme: const BottomSheetThemeData(
     shape: RoundedRectangleBorder(
@@ -34,7 +34,7 @@ final ThemeData lightThemeData = ThemeData(
   ),
   cardTheme: CardTheme(
     elevation: 5.0,
-    shadowColor: Colors.white,
+    shadowColor: const Color(0xffffffff),
     margin: const EdgeInsets.symmetric(
       horizontal: 10.0,
       vertical: 5.0,
@@ -59,7 +59,7 @@ final ThemeData lightThemeData = ThemeData(
       borderRadius: BorderRadius.circular(_defaultRadius),
     ),
     foregroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
-    backgroundColor: const Color.fromRGBO(0, 150, 136, 1.0),
+    backgroundColor: const Color.fromRGBO(107, 119, 247, 1.0),
   ),
   snackBarTheme: const SnackBarThemeData(
     behavior: SnackBarBehavior.floating,

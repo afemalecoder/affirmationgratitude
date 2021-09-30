@@ -1,30 +1,30 @@
 part of theme;
 
 final ThemeData darkThemeData = ThemeData.dark().copyWith(
-  primaryColor: const Color.fromRGBO(77, 182, 172, 1.0),
-  primaryColorDark: const Color.fromRGBO(0, 121, 107, 1.0),
+  primaryColor: const Color.fromRGBO(193, 200, 255, 1.0),
+  primaryColorDark: const Color.fromRGBO(128, 136, 185, 1.0),
   textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: Color.fromRGBO(77, 182, 172, 1.0),
+    cursorColor: Color.fromRGBO(255, 255, 255, 1.0),
   ),
   errorColor: const Color.fromRGBO(207, 102, 121, 1.0),
   indicatorColor: const Color.fromRGBO(77, 182, 172, 1.0),
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
-    primary: Color.fromRGBO(77, 182, 172, 1.0),
-    primaryVariant: Color.fromRGBO(0, 121, 107, 1.0),
-    secondary: Color.fromRGBO(176, 190, 197, 1.0),
-    secondaryVariant: Color.fromRGBO(176, 190, 197, 1.0),
-    background: Color.fromRGBO(18, 18, 18, 1.0),
-    surface: Color.fromRGBO(18, 18, 18, 1.0),
+    primary: Color.fromRGBO(193, 200, 255, 1.0),
+    primaryVariant: Color.fromRGBO(128, 136, 185, 1.0),
+    secondary: Color.fromRGBO(151, 161, 244, 1.0),
+    secondaryVariant: Color.fromRGBO(219, 222, 2537, 1.0),
+    background: Color.fromRGBO(84, 90, 139, 1.0),
+    surface: Color.fromRGBO(128, 136, 185, 1.0),
     error: Color.fromRGBO(207, 102, 121, 1.0),
-    onPrimary: Color.fromRGBO(0, 0, 0, 1.0),
-    onSecondary: Color.fromRGBO(0, 0, 0, 1.0),
+    onPrimary: Color.fromRGBO(84, 90, 139, 1.0),
+    onSecondary: Color.fromRGBO(255, 255, 255, 1.0),
     onBackground: Color.fromRGBO(255, 255, 255, 1.0),
     onSurface: Color.fromRGBO(255, 255, 255, 1.0),
     onError: Color.fromRGBO(0, 0, 0, 1.0),
   ),
   appBarTheme: const AppBarTheme(
-    color: Color.fromRGBO(0, 150, 136, 1.0),
+    color: Color.fromRGBO(193, 200, 255, 1.0),
   ),
   bottomSheetTheme: const BottomSheetThemeData(
     shape: RoundedRectangleBorder(
@@ -60,7 +60,7 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
       borderRadius: BorderRadius.circular(10),
     ),
     foregroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
-    backgroundColor: const Color.fromRGBO(77, 182, 172, 1.0),
+    backgroundColor: const Color.fromRGBO(151, 161, 244, 1.0),
   ),
   snackBarTheme: const SnackBarThemeData(
     behavior: SnackBarBehavior.floating,

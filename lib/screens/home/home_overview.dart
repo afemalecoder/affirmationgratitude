@@ -9,11 +9,11 @@ class HomeScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: CustomPaint(
-          painter: _BackgroundCustomPaint(),
-          child: SizedBox(
-            height: screenSize.height,
-            width: screenSize.width,
+        body: SizedBox(
+          height: screenSize.height,
+          width: screenSize.width,
+          child: CustomPaint(
+            painter: _BackgroundCustomPaint(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                       topRight: Radius.circular(50),
                     ),
                   ),
-                  color: const Color(0xffC1C8FF),
+                  color: lightThemeData.colorScheme.primaryVariant,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 50),
                     child: Column(
@@ -37,23 +37,26 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    const AffirmationScreen(
+                                builder: (_) => const AffirmationScreen(
                                   showBackButton: true,
                                 ),
                               ),
                             );
                           },
                           title: 'Affirmations',
-                          subtitle: 'See all your affirmations',
+                          subtitle: 'See all your affirmations',
                         ),
                         HomeCategoryCard(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(QuoteScreen.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    QuoteScreen(showBackButton: true),
+                              ),
+                            );
                           },
                           title: 'Quotes',
-                          subtitle: 'Read from the daily quotes',
+                          subtitle: 'Read from the daily quotes',
                         ),
                       ],
                     ),

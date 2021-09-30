@@ -41,11 +41,12 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
           child: screens[currentIndex],
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xff8793FA),
-          child: const Icon(
+          backgroundColor:
+              lightThemeData.floatingActionButtonTheme.backgroundColor,
+          child: Icon(
             Icons.add,
             size: 45,
-            color: Color(0xffffffff),
+            color: lightThemeData.colorScheme.onSecondary,
           ),
           onPressed: () =>
               Navigator.of(context).pushNamed(AddNoteScreen.routeName),
@@ -86,15 +87,15 @@ class AffirNavigationBar extends StatelessWidget {
       ],
       selectedLabelStyle: TextStyle(
         fontSize: 12,
-        color: Theme.of(context).colorScheme.secondaryVariant,
+        color: lightThemeData.colorScheme.primary,
       ),
       type: BottomNavigationBarType.fixed,
       unselectedLabelStyle: TextStyle(
         fontSize: 12,
-        color: Theme.of(context).colorScheme.secondaryVariant,
+        color: lightThemeData.colorScheme.primaryVariant,
       ),
-      unselectedItemColor: const Color(0xffC1C8FF),
-      selectedItemColor: const Color(0xff8793FA),
+      unselectedItemColor: lightThemeData.colorScheme.primaryVariant,
+      selectedItemColor: lightThemeData.colorScheme.primary,
       currentIndex: currentIndex,
       onTap: onTap,
     );

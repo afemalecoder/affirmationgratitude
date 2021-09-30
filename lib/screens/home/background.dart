@@ -13,8 +13,9 @@ part of home;
 class _BackgroundCustomPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    const Color overlayColor = Color(0xffC1C8FF);
-    const Color filledColor = Color(0xffECEFFF);
+    Color overlayColor = lightThemeData.colorScheme.background;
+    Color filledColor = lightThemeData.colorScheme.secondaryVariant;
+    Color circleColor = lightThemeData.colorScheme.primary;
 
     const double overlayRadius = 32;
     const double strokeWidth = 6;
@@ -36,7 +37,7 @@ class _BackgroundCustomPaint extends CustomPainter {
     final strokedCirclePaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..color = filledColor;
+      ..color = circleColor;
 
     canvas.drawPath(strokedDeco, strokedCirclePaint);
 
