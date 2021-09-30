@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) =>
-                                    QuoteScreen(showBackButton: true),
+                                    const QuoteScreen(showBackButton: true),
                               ),
                             );
                           },
