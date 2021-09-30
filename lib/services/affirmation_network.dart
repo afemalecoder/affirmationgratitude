@@ -3,9 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
-/// TODO: Change to a network class that interacts with firebase
-class AffirmationOperation extends ChangeNotifier {
-  AffirmationOperation();
+class AffirmationNetwork extends ChangeNotifier {
+  AffirmationNetwork();
   final User firebaseUser = FirebaseAuth.instance.currentUser!;
   final db = FirebaseFirestore.instance;
 

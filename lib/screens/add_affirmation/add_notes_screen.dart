@@ -102,7 +102,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ),
               ),
               onPressed: () async {
-                context.read<AffirmationOperation>().addNewNote(
+                context.read<AffirmationNetwork>().addNewNote(
                       date: DateTime.now().toString(),
                       title: title,
                       content: content,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'package:affirmation_gratitude/core/affirmation_operation.dart';
+import 'package:affirmation_gratitude/services/affirmation_network.dart';
 import 'package:affirmation_gratitude/core/navigation/navigation.dart';
 import 'package:affirmation_gratitude/screens/add_affirmation/add_affirmation.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ListenableProvider<AffirmationOperation>(
-          create: (BuildContext context) => AffirmationOperation(),
+        ListenableProvider<AffirmationNetwork>(
+          create: (BuildContext context) => AffirmationNetwork(),
         ),
         ListenableProvider<AffirmationAuth>(
           create: (BuildContext context) => AffirmationAuth(),
