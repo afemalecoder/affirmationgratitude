@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class AffirmationAppBar extends StatefulWidget implements PreferredSizeWidget {
   const AffirmationAppBar({
+    Key? key,
     required this.label,
     required this.tag,
     this.showBackButton = false,
-  });
+  }) : super(key: key);
 
   final String label;
   final String tag;
@@ -15,14 +16,14 @@ class AffirmationAppBar extends StatefulWidget implements PreferredSizeWidget {
   _AffirmationAppBarState createState() => _AffirmationAppBarState();
 
   @override
-  Size get preferredSize => Size(double.infinity, 90);
+  Size get preferredSize => const Size(double.infinity, 60);
 }
 
 class _AffirmationAppBarState extends State<AffirmationAppBar> {
   double opacity = 0.0;
 
   void _updateBackButtonOpacity() {
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       if (!mounted) return;
       setState(() => opacity = 1.0);
     });
@@ -41,7 +42,7 @@ class _AffirmationAppBarState extends State<AffirmationAppBar> {
             children: [
               if (widget.showBackButton)
                 _AffirmationAppBarBackButton(opacity: opacity),
-              if (!widget.showBackButton) SizedBox(width: 15),
+              if (!widget.showBackButton) const SizedBox(width: 15),
               _AffirmationAppBarTitle(widget: widget),
             ],
           ),
@@ -72,11 +73,14 @@ class _AppBarCard extends StatelessWidget {
           bottomRight: Radius.circular(40),
         ),
       ),
-      child: Row(
-        children: [
-          SizedBox(width: 25),
-          ...children,
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+          children: [
+            const SizedBox(width: 25),
+            ...children,
+          ],
+        ),
       ),
     );
   }
@@ -94,7 +98,7 @@ class _AffirmationAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       widget.label,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
         color: Colors.white,
       ),
@@ -113,7 +117,7 @@ class _AffirmationAppBarBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       opacity: opacity,
       child: InkWell(
         splashColor: Colors.transparent,
@@ -121,8 +125,8 @@ class _AffirmationAppBarBackButton extends StatelessWidget {
         hoverColor: Colors.transparent,
         onTap: () => Navigator.of(context).pop(),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
+        child: const Padding(
+          padding: EdgeInsets.all(10.0),
           child: Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
       ),

@@ -1,18 +1,20 @@
 part of quote;
 
-class QuoteScreen extends StatefulWidget {
+class QuoteScreen extends StatelessWidget {
   static const routeName = '/quotes';
 
-  const QuoteScreen({Key? key}) : super(key: key);
-  @override
-  _QuoteScreenState createState() => _QuoteScreenState();
-}
+  const QuoteScreen({Key? key, this.showBackButton = false}) : super(key: key);
 
-class _QuoteScreenState extends State<QuoteScreen> {
+  final bool showBackButton;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AffirmationAppBar(
+        label: 'Quote',
+        tag: 'Quote-app-bar',
+        showBackButton: showBackButton,
+      ),
       backgroundColor: const Color(0xff464bbd),
       body: Center(
         child: Padding(
