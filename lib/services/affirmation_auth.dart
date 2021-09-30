@@ -14,7 +14,7 @@ class AffirmationAuth with ChangeNotifier {
   }) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       rethrow;
     }
   }
@@ -43,7 +43,7 @@ class AffirmationAuth with ChangeNotifier {
       await _createCloudFirestoreUser(newUser, displayName);
 
       await login(context, email: email, password: password);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       rethrow;
     }
   }
