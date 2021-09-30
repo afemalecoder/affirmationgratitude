@@ -152,7 +152,7 @@ class __FormCardState extends State<_FormCard> {
                             return 'Password do not match';
                           }
                         }),
-                  horizontalSpaceRegular,
+                  const SizedBox(height: 25.0),
                   if (_isLoading)
                     const CircularProgressIndicator()
                   else

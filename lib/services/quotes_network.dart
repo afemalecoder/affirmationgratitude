@@ -1,6 +1,7 @@
 import 'dart:convert';
+
+import 'package:affirmation_gratitude/core/utilities/prefs_string.dart';
 import 'package:affirmation_gratitude/model/quotes.dart';
-import 'package:affirmation_gratitude/utilities/prefs_string.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
