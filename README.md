@@ -1,16 +1,11 @@
 # affirmationgratitude
 
-A new Flutter project.
+With a great design that's delightful to look at, Affirmation Gratitude does not only offer a good design and experience but a couple of features that are sure to positively impact your life.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- ### Affirmations
+As the name implies, Affirmation Gratitude is an app where you can keep record of all the things you were/are greatful for. Add affirmation from the past and all that surely someday will arrive.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ### Quotes
+The app also features Daily Quotes that ignite and uplift you daily. It's possible that you would like to save these quotes for later reference, hence Affirmation Gratitude is rich enough to give you that control and more.
