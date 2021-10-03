@@ -63,9 +63,8 @@ class _AppBarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.primary,
       elevation: 10,
-      shadowColor: const Color(0xffC1C8FF),
-      color: const Color(0xff8793FA),
       margin: EdgeInsets.zero,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -98,9 +97,10 @@ class _AffirmationAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       widget.label,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 24,
-        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }
@@ -125,9 +125,10 @@ class _AffirmationAppBarBackButton extends StatelessWidget {
         hoverColor: Colors.transparent,
         onTap: () => Navigator.of(context).pop(),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        child: const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Icon(Icons.arrow_back_ios, color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Icon(Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     );

@@ -19,6 +19,12 @@ class AffirmationNetwork extends ChangeNotifier {
     )
   ];
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAffirmation() {
+    final String userAffirmationsPath =
+        'affirmations/${firebaseUser.uid}/affirmations';
+    return db.collection(userAffirmationsPath).snapshots();
+  }
+
   void addNewNote({
     required String date,
     required String? title,

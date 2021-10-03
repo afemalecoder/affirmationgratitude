@@ -12,4 +12,3 @@ import 'package:provider/provider.dart';
 
 part 'affirmation_card.dart';
 part 'affirmation_screen.dart';
-part 'floating_button.dart';

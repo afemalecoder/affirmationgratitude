@@ -16,7 +16,7 @@ class AffirmationCard extends StatelessWidget {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: lightThemeData.colorScheme.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
@@ -37,7 +37,7 @@ class AffirmationCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: lightThemeData.colorScheme.onSurface,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -47,7 +47,7 @@ class AffirmationCard extends StatelessWidget {
                     DateTime.parse(affirmation.date),
                   )}',
                   style: TextStyle(
-                      color: lightThemeData.colorScheme.primaryVariant),
+                      color: Theme.of(context).colorScheme.onSecondary),
                 ),
                 const SizedBox(height: 5),
                 Flexible(
@@ -58,7 +58,7 @@ class AffirmationCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 17,
-                      color: lightThemeData.colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -84,7 +84,7 @@ class AffirmationMood extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       const MoodHelper().getIcon(label),
-      color: lightThemeData.colorScheme.primaryVariant,
+      color: Theme.of(context).colorScheme.primaryVariant,
       size: 42,
     );
   }

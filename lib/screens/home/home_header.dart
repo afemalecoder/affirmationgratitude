@@ -20,13 +20,13 @@ class HomeHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.w900,
-                color: lightThemeData.colorScheme.primary,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
             Text(
               'Date ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
               style: TextStyle(
-                color: lightThemeData.colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ],

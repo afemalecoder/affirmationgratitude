@@ -14,17 +14,19 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
     primaryVariant: Color.fromRGBO(128, 136, 185, 1.0),
     secondary: Color.fromRGBO(151, 161, 244, 1.0),
     secondaryVariant: Color.fromRGBO(219, 222, 2537, 1.0),
-    background: Color.fromRGBO(84, 90, 139, 1.0),
-    surface: Color.fromRGBO(128, 136, 185, 1.0),
+    background: Color.fromRGBO(51, 57, 102, 1.0),
+    surface: Color.fromRGBO(84, 90, 139, 1.0),
     error: Color.fromRGBO(207, 102, 121, 1.0),
     onPrimary: Color.fromRGBO(84, 90, 139, 1.0),
-    onSecondary: Color.fromRGBO(255, 255, 255, 1.0),
+    onSecondary: Color.fromRGBO(193, 200, 255, 1.0),
     onBackground: Color.fromRGBO(255, 255, 255, 1.0),
     onSurface: Color.fromRGBO(255, 255, 255, 1.0),
     onError: Color.fromRGBO(0, 0, 0, 1.0),
   ),
+  scaffoldBackgroundColor: const Color.fromRGBO(51, 57, 102, 1.0),
   appBarTheme: const AppBarTheme(
-    color: Color.fromRGBO(193, 200, 255, 1.0),
+    shadowColor: Color.fromRGBO(0, 0, 0, 0.0),
+    backgroundColor: Color.fromRGBO(193, 200, 255, 1.0),
   ),
   bottomSheetTheme: const BottomSheetThemeData(
     shape: RoundedRectangleBorder(
@@ -35,6 +37,7 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
     ),
   ),
   cardTheme: CardTheme(
+    color: const Color.fromRGBO(84, 90, 139, 1.0),
     elevation: 5.0,
     margin: const EdgeInsets.symmetric(
       horizontal: 10.0,
@@ -54,13 +57,10 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
       borderRadius: BorderRadius.circular(_defaultRadius),
     ),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     highlightElevation: 2,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    foregroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
-    backgroundColor: const Color.fromRGBO(151, 161, 244, 1.0),
+    foregroundColor: Color.fromRGBO(255, 255, 255, 1.0),
+    backgroundColor: Color.fromRGBO(193, 200, 255, 1.0),
   ),
   snackBarTheme: const SnackBarThemeData(
     behavior: SnackBarBehavior.floating,
