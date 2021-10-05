@@ -8,14 +8,6 @@ class AffirmationScreen extends StatelessWidget {
 
   static const routeName = '/affirmation';
 
-  Stream<QuerySnapshot<Object?>> _watchAffirmations() {
-    final db = FirebaseFirestore.instance;
-    final User firebaseUser = FirebaseAuth.instance.currentUser!;
-
-    final String path = 'affirmations/${firebaseUser.uid}/affirmations';
-    return db.collection(path).orderBy('date').snapshots();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +17,7 @@ class AffirmationScreen extends StatelessWidget {
         showBackButton: showBackButton,
       ),
       body: StreamBuilder<QuerySnapshot<Object?>>(
-        stream: _watchAffirmations(),
+        stream: context.watch<AffirmationNetwork>().watchAffirmations(),
         builder: (context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
