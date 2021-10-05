@@ -16,8 +16,8 @@ final ThemeData lightThemeData = ThemeData(
     surface: Color.fromRGBO(138, 150, 246, 1.0),
     error: Color.fromRGBO(176, 0, 32, 1.0),
     onPrimary: Color.fromRGBO(255, 255, 255, 1.0),
-    onSecondary: Color.fromRGBO(255, 255, 255, 1.0),
-    onBackground: Color.fromRGBO(135, 147, 250, 1.0),
+    onSecondary: Color.fromRGBO(193, 200, 255, 1.0),
+    onBackground: Color.fromRGBO(107, 119, 247, 1.0),
     onSurface: Color.fromRGBO(255, 255, 255, 1.0),
     onError: Color.fromRGBO(255, 255, 255, 1.0),
   ),
@@ -34,7 +34,7 @@ final ThemeData lightThemeData = ThemeData(
   ),
   cardTheme: CardTheme(
     elevation: 5.0,
-    shadowColor: const Color(0xffffffff),
+    color: const Color.fromRGBO(107, 119, 247, 1.0),
     margin: const EdgeInsets.symmetric(
       horizontal: 10.0,
       vertical: 5.0,
@@ -53,13 +53,10 @@ final ThemeData lightThemeData = ThemeData(
       borderRadius: BorderRadius.circular(_defaultRadius),
     ),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     highlightElevation: 2,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(_defaultRadius),
-    ),
-    foregroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
-    backgroundColor: const Color.fromRGBO(107, 119, 247, 1.0),
+    foregroundColor: Color.fromRGBO(255, 255, 255, 1.0),
+    backgroundColor: Color.fromRGBO(107, 119, 247, 1.0),
   ),
   snackBarTheme: const SnackBarThemeData(
     behavior: SnackBarBehavior.floating,

@@ -42,11 +42,11 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor:
-              lightThemeData.floatingActionButtonTheme.backgroundColor,
+              Theme.of(context).floatingActionButtonTheme.backgroundColor,
           child: Icon(
             Icons.add,
             size: 45,
-            color: lightThemeData.colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           onPressed: () =>
               Navigator.of(context).pushNamed(AddNoteScreen.routeName),
@@ -77,6 +77,7 @@ class AffirNavigationBar extends StatelessWidget {
   @override
   BottomNavigationBar build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
         BottomNavigationBarItem(
@@ -87,15 +88,15 @@ class AffirNavigationBar extends StatelessWidget {
       ],
       selectedLabelStyle: TextStyle(
         fontSize: 12,
-        color: lightThemeData.colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary,
       ),
       type: BottomNavigationBarType.fixed,
       unselectedLabelStyle: TextStyle(
         fontSize: 12,
-        color: lightThemeData.colorScheme.primaryVariant,
+        color: Theme.of(context).colorScheme.primaryVariant,
       ),
-      unselectedItemColor: lightThemeData.colorScheme.primaryVariant,
-      selectedItemColor: lightThemeData.colorScheme.primary,
+      unselectedItemColor: Theme.of(context).colorScheme.primaryVariant,
+      selectedItemColor: Theme.of(context).colorScheme.primary,
       currentIndex: currentIndex,
       onTap: onTap,
     );

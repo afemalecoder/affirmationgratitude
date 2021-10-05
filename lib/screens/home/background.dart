@@ -11,12 +11,16 @@ part of home;
 /// 2. Assign properties eg. color or style by calling [Paint]
 /// 3. Call [Canvas] and pass in the [Path] and [Paint] to draw
 class _BackgroundCustomPaint extends CustomPainter {
+  _BackgroundCustomPaint({
+    required this.overlayColor,
+    required this.filledColor,
+    required this.circleColor,
+  });
+  Color overlayColor;
+  Color filledColor;
+  Color circleColor;
   @override
   void paint(Canvas canvas, Size size) {
-    Color overlayColor = lightThemeData.colorScheme.background;
-    Color filledColor = lightThemeData.colorScheme.secondaryVariant;
-    Color circleColor = lightThemeData.colorScheme.primary;
-
     const double overlayRadius = 32;
     const double strokeWidth = 6;
     final height = size.height;

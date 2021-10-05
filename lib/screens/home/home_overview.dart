@@ -13,7 +13,11 @@ class HomeScreen extends StatelessWidget {
           height: screenSize.height,
           width: screenSize.width,
           child: CustomPaint(
-            painter: _BackgroundCustomPaint(),
+            painter: _BackgroundCustomPaint(
+              overlayColor: Theme.of(context).colorScheme.background,
+              filledColor: Theme.of(context).colorScheme.primaryVariant,
+              circleColor: Theme.of(context).colorScheme.primary,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -28,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                       topRight: Radius.circular(50),
                     ),
                   ),
-                  color: lightThemeData.colorScheme.primaryVariant,
+                  color: Theme.of(context).colorScheme.primaryVariant,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 50),
                     child: Column(

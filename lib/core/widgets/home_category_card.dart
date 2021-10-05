@@ -1,4 +1,3 @@
-import 'package:affirmation_gratitude/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeCategoryCard extends StatelessWidget {
@@ -19,15 +18,14 @@ class HomeCategoryCard extends StatelessWidget {
       height: 200,
       width: double.infinity,
       child: Card(
-        color: lightThemeData.colorScheme.surface,
         elevation: 10,
         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-        shadowColor: lightThemeData.cardTheme.shadowColor,
+        color: Theme.of(context).cardTheme.color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: InkWell(
-          splashColor: lightThemeData.colorScheme.primary,
+          splashColor: Theme.of(context).colorScheme.secondary,
           highlightColor: Colors.transparent,
           borderRadius: BorderRadius.circular(20),
           onTap: onTap,
@@ -39,17 +37,17 @@ class HomeCategoryCard extends StatelessWidget {
               children: <Text>[
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xffffffff),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   subtitle,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w900,
-                    color: Color(0xffC1C8FF),
+                    color: Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
               ],
