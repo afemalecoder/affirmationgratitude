@@ -11,6 +11,7 @@ class AffirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AffirmationAppBar(
         label: 'Affirmation',
         tag: 'Affirmation-app-bar',
@@ -32,7 +33,6 @@ class AffirmationScreen extends StatelessWidget {
                 snapshot.data!.docs.reversed.toList();
 
             return ListView.builder(
-              padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
               itemCount: _docs.length,
               itemBuilder: (context, int i) {
