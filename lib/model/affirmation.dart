@@ -1,9 +1,9 @@
 class Affirmation {
   final String? id;
-  final String date;
-  final String? title;
   final String content;
+  final String date;
   final String mood;
+  final String? title;
 
   Affirmation({
     this.id,
@@ -14,11 +14,11 @@ class Affirmation {
   });
   factory Affirmation.fromJson(Map<String, dynamic> json) {
     return Affirmation(
-      // id: json['id'] as String,
+      id: json['id'] as String?,
       content: json['content'] as String,
       date: json['date'] as String,
       mood: json['mood'] as String,
-      title: json['title'] as String,
+      title: json['title'] as String?,
     );
   }
 }

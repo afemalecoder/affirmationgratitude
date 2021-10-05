@@ -11,14 +11,14 @@ part of home;
 /// 2. Assign properties eg. color or style by calling [Paint]
 /// 3. Call [Canvas] and pass in the [Path] and [Paint] to draw
 class _BackgroundCustomPaint extends CustomPainter {
-  Color overlayColor;
-  Color filledColor;
-  Color circleColor;
   _BackgroundCustomPaint({
     required this.overlayColor,
     required this.filledColor,
     required this.circleColor,
   });
+  Color overlayColor;
+  Color filledColor;
+  Color circleColor;
   @override
   void paint(Canvas canvas, Size size) {
     const double overlayRadius = 32;
