@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "841795631247",
+    "project_id": "affirmation-gratitude",
+    "storage_bucket": "affirmation-gratitude.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841795631247:android:92f624899366a3d3c5d8fa",
+        "android_client_info": {
+          "package_name": "com.example.affirmationgratitude"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841795631247-98d00tv7vshhbbn4b7n9k5k3esacfngm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0uRPX9AP09-SGYcz1-YkCGHk2ySWUGLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841795631247-98d00tv7vshhbbn4b7n9k5k3esacfngm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
