@@ -9,6 +9,14 @@
 .history
 .svn/
 
+# Hide local files that don't need to be committed
+*.vscode
+.dart_tool
+android/**
+ios/**
+Web/**
+assets/**
+
 # IntelliJ related
 *.iml
 *.ipr
