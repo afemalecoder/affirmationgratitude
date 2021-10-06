@@ -41,17 +41,15 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
           child: screens[currentIndex],
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor:
-                Theme.of(context).floatingActionButtonTheme.backgroundColor,
-            child: Icon(
-              Icons.add,
-              size: 45,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-            onPressed: () => context.read<ThemeProvider>().toggleAppTheme()
-            // Navigator.of(context).pushNamed(AddNoteScreen.routeName),
-
-            ),
+          backgroundColor:
+              Theme.of(context).floatingActionButtonTheme.backgroundColor,
+          child: Icon(
+            Icons.add,
+            size: 45,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+          onPressed: () => context.read<ThemeProvider>().toggleAppTheme(),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AffirNavigationBar(
           currentIndex: currentIndex,
