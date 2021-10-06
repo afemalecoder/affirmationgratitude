@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider with ChangeNotifier {
   ThemeProvider() {
     _getThemeMood().then((bool value) async {
-      if (value == false) {
+      if (!value) {
         _isDarkTheme = value;
         _currentTheme = lightThemeData;
       } else {
@@ -56,9 +56,9 @@ class ThemeProvider with ChangeNotifier {
 
   bool? _isDarkTheme;
 
-  ThemeData? _currentTheme;
+  ThemeData _currentTheme = lightThemeData;
 
   bool? get darkTheme => _isDarkTheme;
 
-  ThemeData? get affirmationTheme => _currentTheme;
+  ThemeData get affirmationTheme => _currentTheme;
 }
