@@ -1,6 +1,4 @@
-import 'package:affirmation_gratitude/core/theme/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of theme;
 
 class ThemeProvider with ChangeNotifier {
   ThemeProvider() {

@@ -1,5 +1,5 @@
 import 'package:affirmation_gratitude/core/navigation/navigation.dart';
-import 'package:affirmation_gratitude/core/theme/theme_provider.dart';
+import 'package:affirmation_gratitude/core/theme/theme.dart';
 import 'package:affirmation_gratitude/screens/add_affirmation/add_affirmation.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
