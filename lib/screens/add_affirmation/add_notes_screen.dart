@@ -77,7 +77,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 textInputAction: TextInputAction.newline,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color(0xff6b6fca),
+                  fillColor: const Color(0xffffffff),
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(10),
