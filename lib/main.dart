@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
 
   runApp(const MyApp());
@@ -30,6 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ListenableProvider<ThemeProvider>(
+          create: (BuildContext context) => ThemeProvider(),
+        ),
         ListenableProvider<AffirmationNetwork>(
           create: (BuildContext context) => AffirmationNetwork(),
         ),
@@ -40,41 +42,28 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => QuotesNetwork(),
         ),
       ],
-      child: const _APP(),
-    );
-  }
-}
-
-class _APP extends StatelessWidget {
-  const _APP({Key? key}) : super(key: key);
-
-  Future<void> getQuotes(BuildContext context) async {
-    final QuotesNetwork network = context.read<QuotesNetwork>();
-    if (network.quote == null) await network.getQuote();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    getQuotes(context);
-    return MaterialApp(
-      theme: darkThemeData,
-      home: StreamBuilder<User?>(
-        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-          return FirebaseAuth.instance.currentUser == null
-              ? const AuthenticationScreen()
-              : const AffirmationNavigation();
-        },
-      ),
-      routes: {
-        AffirmationNavigation.routeName: (context) =>
-            const AffirmationNavigation(),
-        QuoteScreen.routeName: (context) => const QuoteScreen(),
-        AuthenticationScreen.routeName: (context) =>
-            const AuthenticationScreen(),
-        AffirmationScreen.routeName: (context) => const AffirmationScreen(),
-        AddNoteScreen.routeName: (context) => const AddNoteScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
-      },
+      child: Consumer<ThemeProvider>(builder: (_, ThemeProvider theme, __) {
+        return MaterialApp(
+          theme: theme.affirmationTheme,
+          home: StreamBuilder<User?>(
+            builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+              return FirebaseAuth.instance.currentUser == null
+                  ? const AuthenticationScreen()
+                  : const AffirmationNavigation();
+            },
+          ),
+          routes: {
+            AffirmationNavigation.routeName: (context) =>
+                const AffirmationNavigation(),
+            QuoteScreen.routeName: (context) => const QuoteScreen(),
+            AuthenticationScreen.routeName: (context) =>
+                const AuthenticationScreen(),
+            AffirmationScreen.routeName: (context) => const AffirmationScreen(),
+            AddNoteScreen.routeName: (context) => const AddNoteScreen(),
+            HomeScreen.routeName: (context) => const HomeScreen(),
+          },
+        );
+      }),
     );
   }
 }
