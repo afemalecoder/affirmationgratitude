@@ -40,100 +40,7 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
           },
           child: screens[currentIndex],
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor:
-              Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          child: Icon(
-            Icons.add,
-            size: 45,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
-          onPressed: () {
-            showModalBottomSheet(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(40),
-                  ),
-                ),
-                context: context,
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 40, left: 40, right: 40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Pick a Mood',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [],
-                            ),
-                          ),
-                          Text(
-                            'Add your \naffirmation',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                          Expanded(
-                            child: TextField(
-                              maxLines: 50,
-                              textInputAction: TextInputAction.newline,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor:
-                                    Theme.of(context).colorScheme.primary,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                hintText: 'Type here...',
-                                hintStyle: const TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onChanged: (value) {
-                                // setState(() => content = value);
-                              },
-                            ),
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary:
-                                  Theme.of(context).colorScheme.primaryVariant,
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            onPressed: () async {},
-                            child: const Text(
-                              'ADD',
-                              style: TextStyle(color: Color(0xff464bbd)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                });
-          },
-        ),
+        floatingActionButton: const AffirmationBottomSheet(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AffirNavigationBar(
           currentIndex: currentIndex,
@@ -142,32 +49,6 @@ class _AffirmationNavigationState extends State<AffirmationNavigation> {
             setState(() => currentIndex = screenIndex);
           },
         ),
-      ),
-    );
-  }
-}
-
-class MoodPicker extends StatelessWidget {
-  const MoodPicker({
-    Key? key,
-    required this.mood,
-    required this.onTap,
-    required this.iconMood,
-  }) : super(key: key);
-
-  final String mood;
-  final void Function()? onTap;
-  final IconData iconMood;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: const [
-          Icon(Icons.sentiment_very_satisfied),
-          Text('mood'),
-        ],
       ),
     );
   }
