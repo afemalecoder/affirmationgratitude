@@ -14,11 +14,6 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
     return FloatingActionButton(
       backgroundColor:
           Theme.of(context).floatingActionButtonTheme.backgroundColor,
-      child: Icon(
-        Icons.add,
-        size: 45,
-        color: Theme.of(context).colorScheme.onPrimary,
-      ),
       onPressed: () {
         showModalBottomSheet(
           backgroundColor: Theme.of(context).colorScheme.primaryVariant,
@@ -32,89 +27,108 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
           builder: (BuildContext context) {
             return SizedBox(
               height: MediaQuery.of(context).size.height * 0.80,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 40,
-                  left: 40,
-                  right: 40,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pick a Mood',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Theme.of(context).colorScheme.onSurface,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    //TODO: FAB center and overflow the sMBS half way.
+                    left: MediaQuery.of(context).size.width / 2,
+                    //TODO: Extract FloatingActionButton and make into reusble widget
+                    child: FloatingActionButton(
+                      backgroundColor: Theme.of(context)
+                          .floatingActionButtonTheme
+                          .backgroundColor,
+                      onPressed: () {
+                        // TODO: Add to Firebase database
+                      },
+                      child: Icon(
+                        Icons.add,
+                        size: 45,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        AffirmationMood(MoodHelper.excited),
-                        AffirmationMood(MoodHelper.happy),
-                        AffirmationMood(MoodHelper.neutral),
-                        AffirmationMood(MoodHelper.sad),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 40,
+                      left: 40,
+                      right: 40,
+                      bottom: 20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Pick a Mood',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            AffirmationMood(MoodHelper.excited),
+                            AffirmationMood(MoodHelper.happy),
+                            AffirmationMood(MoodHelper.neutral),
+                            AffirmationMood(MoodHelper.sad),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Add your \naffirmation',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          //TODO: Dynamic size
+                          height: 250,
+                          //TODO: TextField above keyboard or autofocus on text that's being typed.
+                          child: TextField(
+                            maxLines: 50,
+                            textInputAction: TextInputAction.newline,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryVariant,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              hintText: 'Type here...',
+                              contentPadding: const EdgeInsets.all(20),
+                              hintStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryVariant,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              // setState(() => content = value);
+                            },
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Add your \naffirmation',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      height: 300,
-                      child: TextField(
-                        maxLines: 50,
-                        textInputAction: TextInputAction.newline,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor:
-                              Theme.of(context).colorScheme.secondaryVariant,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          hintText: 'Type here...',
-                          contentPadding: const EdgeInsets.all(20),
-                          hintStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Theme.of(context).colorScheme.primaryVariant,
-                          ),
-                        ),
-                        onChanged: (value) {
-                          // setState(() => content = value);
-                        },
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).colorScheme.primaryVariant,
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: () async {},
-                      child: const Text(
-                        'ADD',
-                        style: TextStyle(color: Color(0xff464bbd)),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           },
         );
       },
+      child: Icon(
+        Icons.add,
+        size: 45,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
     );
   }
 }
