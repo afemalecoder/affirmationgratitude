@@ -1,5 +1,8 @@
 import 'package:affirmation_gratitude/core/helpers/mood_helper.dart';
+import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:flutter/material.dart';
+
+import 'affirmation_floating_action_button.dart';
 
 class AffirmationBottomSheet extends StatefulWidget {
   const AffirmationBottomSheet({Key? key}) : super(key: key);
@@ -11,9 +14,7 @@ class AffirmationBottomSheet extends StatefulWidget {
 class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      backgroundColor:
-          Theme.of(context).floatingActionButtonTheme.backgroundColor,
+    return AffirmationFloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
           backgroundColor: Theme.of(context).colorScheme.primaryVariant,
@@ -30,26 +31,22 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    //TODO: FAB center and overflow the sMBS half way.
-                    left: MediaQuery.of(context).size.width / 2,
-                    //TODO: Extract FloatingActionButton and make into reusble widget
-                    child: FloatingActionButton(
-                      backgroundColor: Theme.of(context)
-                          .floatingActionButtonTheme
-                          .backgroundColor,
-                      onPressed: () {
-                        // TODO: Add to Firebase database
-                      },
-                      child: Icon(
-                        Icons.add,
-                        size: 45,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
+                    left: MediaQuery.of(context).size.width * 0.45,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    child: AffirmationFloatingActionButton(onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (_) => const AffirmationScreen(
+                            showBackButton: true,
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 40,
+                      top: 60,
                       left: 40,
                       right: 40,
                       bottom: 20,
@@ -85,10 +82,10 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
                         ),
                         const SizedBox(height: 10),
                         SizedBox(
-                          //TODO: Dynamic size
-                          height: 250,
+                          height: MediaQuery.of(context).size.width * 0.80,
                           //TODO: TextField above keyboard or autofocus on text that's being typed.
                           child: TextField(
+                            autofocus: true,
                             maxLines: 50,
                             textInputAction: TextInputAction.newline,
                             decoration: InputDecoration(
@@ -124,11 +121,6 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
           },
         );
       },
-      child: Icon(
-        Icons.add,
-        size: 45,
-        color: Theme.of(context).colorScheme.onPrimary,
-      ),
     );
   }
 }

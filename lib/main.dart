@@ -1,6 +1,6 @@
 import 'package:affirmation_gratitude/core/navigation/navigation.dart';
 import 'package:affirmation_gratitude/core/theme/theme.dart';
-import 'package:affirmation_gratitude/screens/add_affirmation/add_affirmation.dart';
+
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
 import 'package:affirmation_gratitude/screens/home/home.dart';
@@ -59,7 +59,6 @@ class MyApp extends StatelessWidget {
             AuthenticationScreen.routeName: (context) =>
                 const AuthenticationScreen(),
             AffirmationScreen.routeName: (context) => const AffirmationScreen(),
-            AddNoteScreen.routeName: (context) => const AddNoteScreen(),
             HomeScreen.routeName: (context) => const HomeScreen(),
           },
         );
