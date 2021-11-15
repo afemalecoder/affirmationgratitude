@@ -108,7 +108,7 @@ class AddButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () => Navigator.pushNamed(context, AddNoteScreen.routeName),
+        onPressed: () {},
         child: const Text(
           'New affirmation',
           style: TextStyle(fontWeight: FontWeight.bold),

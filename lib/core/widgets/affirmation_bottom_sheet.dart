@@ -1,6 +1,8 @@
 import 'package:affirmation_gratitude/core/helpers/mood_helper.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
+import 'package:affirmation_gratitude/services/affirmation_network.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 import 'affirmation_floating_action_button.dart';
 
@@ -12,6 +14,7 @@ class AffirmationBottomSheet extends StatefulWidget {
 }
 
 class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
+  late String content;
   @override
   Widget build(BuildContext context) {
     return AffirmationFloatingActionButton(
@@ -33,16 +36,12 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
                   Positioned(
                     left: MediaQuery.of(context).size.width * 0.45,
                     height: MediaQuery.of(context).size.height * 0.1,
-                    child: AffirmationFloatingActionButton(onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (_) => const AffirmationScreen(
-                            showBackButton: true,
-                          ),
-                        ),
-                      );
-                    }),
+                    child: AffirmationFloatingActionButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icons.close,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -84,7 +83,7 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
                         SizedBox(
                           height: MediaQuery.of(context).size.width * 0.80,
                           //TODO: TextField above keyboard or autofocus on text that's being typed.
-                          child: TextField(
+                          child: TextFormField(
                             autofocus: true,
                             maxLines: 50,
                             textInputAction: TextInputAction.newline,
@@ -108,10 +107,27 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
                               ),
                             ),
                             onChanged: (value) {
-                              // setState(() => content = value);
+                              setState(() => content = value);
                             },
                           ),
                         ),
+                        ElevatedButton(
+                            onPressed: () {
+                              context.read<AffirmationNetwork>().addNewNote(
+                                  date: DateTime.now().toString(),
+                                  title: 'Mood',
+                                  content: content,
+                                  mood: 'Happy');
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const AffirmationScreen(
+                                    showBackButton: true,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text('add')),
                       ],
                     ),
                   ),
@@ -121,11 +137,12 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
           },
         );
       },
+      icon: Icons.add,
     );
   }
 }
 
-class AffirmationMood extends StatelessWidget {
+class AffirmationMood extends StatefulWidget {
   const AffirmationMood(
     this.label, {
     Key? key,
@@ -134,23 +151,40 @@ class AffirmationMood extends StatelessWidget {
   final String label;
 
   @override
+  State<AffirmationMood> createState() => _AffirmationMoodState();
+}
+
+class _AffirmationMoodState extends State<AffirmationMood> {
+  Color selectedColor = Colors.transparent;
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(
-          const MoodHelper().getIcon(label),
-          color: Theme.of(context).colorScheme.secondary,
-          size: 42,
+    //TODO inkWell or Getsturedetector
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedColor = Colors.black;
+        });
+      },
+      child: Container(
+        color: selectedColor,
+        child: Column(
+          children: [
+            Icon(
+              const MoodHelper().getIcon(widget.label),
+              color: Theme.of(context).colorScheme.secondary,
+              size: 42,
+            ),
+            Text(
+              const MoodHelper().getTitle(widget.label),
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+          ],
         ),
-        Text(
-          const MoodHelper().getTitle(label),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
