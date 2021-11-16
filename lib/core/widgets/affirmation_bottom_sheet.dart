@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+
 import 'package:affirmation_gratitude/core/helpers/mood_helper.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/services/affirmation_network.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
 
 import 'affirmation_floating_action_button.dart';
 
@@ -15,6 +16,7 @@ class AffirmationBottomSheet extends StatefulWidget {
 
 class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
   late String content;
+
   @override
   Widget build(BuildContext context) {
     return AffirmationFloatingActionButton(
@@ -155,35 +157,36 @@ class AffirmationMood extends StatefulWidget {
 }
 
 class _AffirmationMoodState extends State<AffirmationMood> {
-  Color selectedColor = Colors.transparent;
   @override
   Widget build(BuildContext context) {
-    //TODO inkWell or Getsturedetector
     return InkWell(
-      onTap: () {
-        setState(() {
-          selectedColor = Colors.black;
-        });
-      },
-      child: Container(
-        color: selectedColor,
-        child: Column(
-          children: [
-            Icon(
-              const MoodHelper().getIcon(widget.label),
-              color: Theme.of(context).colorScheme.secondary,
-              size: 42,
-            ),
-            Text(
-              const MoodHelper().getTitle(widget.label),
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurface,
+      child: Column(
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            decoration: ShapeDecoration(
+                shape: const CircleBorder(),
+                color: Colors.grey.withOpacity(0.6)),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                const MoodHelper().getIcon(widget.label),
+                size: 40,
               ),
+              color: Theme.of(context).colorScheme.secondary,
+              onPressed: () {},
             ),
-          ],
-        ),
+          ),
+          Text(
+            const MoodHelper().getTitle(widget.label),
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ],
       ),
     );
   }
