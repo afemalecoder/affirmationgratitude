@@ -83,7 +83,7 @@ class AffirmationMood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Icon(
-      const MoodHelper().getIcon(label),
+      const MoodHelper().getMood(label).icon,
       color: Theme.of(context).colorScheme.primaryVariant,
       size: 42,
     );

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
-
 import 'package:affirmation_gratitude/core/helpers/mood_helper.dart';
+import 'package:affirmation_gratitude/model/mood.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/services/affirmation_network.dart';
+
+import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 import 'affirmation_floating_action_button.dart';
 
@@ -65,12 +66,9 @@ class _AffirmationBottomSheetState extends State<AffirmationBottomSheet> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            AffirmationMood(MoodHelper.excited),
-                            AffirmationMood(MoodHelper.happy),
-                            AffirmationMood(MoodHelper.neutral),
-                            AffirmationMood(MoodHelper.sad),
-                          ],
+                          children: MoodHelper.moods.map((Mood mood) {
+                            return AffirmationMood(mood.label);
+                          }).toList(),
                         ),
                         const SizedBox(height: 20),
                         Text(
@@ -171,7 +169,7 @@ class _AffirmationMoodState extends State<AffirmationMood> {
             child: IconButton(
               padding: EdgeInsets.zero,
               icon: Icon(
-                const MoodHelper().getIcon(widget.label),
+                const MoodHelper().getMood(widget.label).icon,
                 size: 40,
               ),
               color: Theme.of(context).colorScheme.secondary,
@@ -179,7 +177,7 @@ class _AffirmationMoodState extends State<AffirmationMood> {
             ),
           ),
           Text(
-            const MoodHelper().getTitle(widget.label),
+            const MoodHelper().getMood(widget.label).label,
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
