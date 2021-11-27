@@ -16,7 +16,7 @@ class MoodHelper {
     Mood(label: sad, icon: Icons.mood_bad),
   ];
 
-  Mood getMood(String label) {
+  static Mood mood(String label) {
     return moods.firstWhere((Mood mood) {
       return mood.label == label;
     });

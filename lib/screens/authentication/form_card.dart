@@ -26,6 +26,8 @@ class __FormCardState extends State<_FormCard> {
       return;
     }
 
+    FocusManager.instance.primaryFocus?.unfocus();
+
     _formKey.currentState!.save();
 
     setState(() => _isLoading = true);

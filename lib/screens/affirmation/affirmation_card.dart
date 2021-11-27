@@ -8,10 +8,16 @@ class AffirmationCard extends StatelessWidget {
 
   final Affirmation affirmation;
 
+  String formattedDate() {
+    return DateFormat.yMMMMd().format(
+      DateTime.parse(affirmation.date),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       padding: const EdgeInsets.all(15),
       height: 150,
       width: double.infinity,
@@ -41,13 +47,12 @@ class AffirmationCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 2),
                 Text(
-                  'Date: ${DateFormat.yMMMMd().format(
-                    DateTime.parse(affirmation.date),
-                  )}',
+                  'Date: ${formattedDate()}',
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary),
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Flexible(
@@ -65,7 +70,7 @@ class AffirmationCard extends StatelessWidget {
               ],
             ),
           ),
-          const AffirmationMood(MoodHelper.sad),
+          AffirmationMood(affirmation.mood),
         ],
       ),
     );
@@ -74,16 +79,16 @@ class AffirmationCard extends StatelessWidget {
 
 class AffirmationMood extends StatelessWidget {
   const AffirmationMood(
-    this.label, {
+    this.mood, {
     Key? key,
   }) : super(key: key);
 
-  final String label;
+  final String mood;
 
   @override
   Widget build(BuildContext context) {
     return Icon(
-      const MoodHelper().getMood(label).icon,
+      MoodHelper.mood(mood).icon,
       color: Theme.of(context).colorScheme.primaryVariant,
       size: 42,
     );
