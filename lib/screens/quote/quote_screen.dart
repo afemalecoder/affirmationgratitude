@@ -25,6 +25,7 @@ class QuoteScreen extends StatelessWidget {
               Consumer<QuotesNetwork>(
                 builder: (builder, QuotesNetwork network, _) {
                   if (network.quote == null) {
+                    print('no data!');
                     return const CircularProgressIndicator();
                   } else {
                     return AffirmationBody(
@@ -33,7 +34,6 @@ class QuoteScreen extends StatelessWidget {
                   }
                 },
               ),
-              const AddButton(),
             ],
           ),
         ),
@@ -84,34 +84,6 @@ class AffirmationBody extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AddButton extends StatelessWidget {
-  const AddButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 100, bottom: 20),
-      child: TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(5),
-            ),
-          ),
-        ),
-        onPressed: () {},
-        child: const Text(
-          'New affirmation',
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

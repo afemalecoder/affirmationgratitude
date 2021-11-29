@@ -33,12 +33,13 @@ class QuotesNetwork with ChangeNotifier {
 
     if (quote != null) {
       response = null;
-      return;
+      return print('no data!');
     }
 
     if (response.statusCode == 200) {
       quote = Quote.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
       await cacheQuote(quote!);
+      print('data!');
       notifyListeners();
     } else {
       throw Exception('Failed to load quote');
