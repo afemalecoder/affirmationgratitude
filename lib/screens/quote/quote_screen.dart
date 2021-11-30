@@ -38,7 +38,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 future: futureQuote,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return AffirmationBody(
+                    return QuoteBody(
                       quote: snapshot.data!.quoteText,
                       author: snapshot.data!.quoteAuthor,
                     );
@@ -56,8 +56,8 @@ class _QuoteScreenState extends State<QuoteScreen> {
   }
 }
 
-class AffirmationBody extends StatelessWidget {
-  const AffirmationBody({
+class QuoteBody extends StatelessWidget {
+  const QuoteBody({
     Key? key,
     required this.quote,
     required this.author,
