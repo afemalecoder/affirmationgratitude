@@ -14,33 +14,30 @@ class QuotesNetwork with ChangeNotifier {
 
   final String _baseUrlAPI = 'https://favqs.com/api';
 
-  Future<void> cacheQuote(Quote quote) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.setString(PrefsString.quoteAuthor, quote.quoteAuthor);
-
-    await prefs.setString(PrefsString.quoteText, quote.quoteText);
-
-    await prefs.setString(PrefsString.quoteDate, quote.quoteDate);
-  }
+  // Future<void> cacheQuote(Quote quote) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //
+  //   await prefs.setString(PrefsString.quoteAuthor, quote.quoteAuthor);
+  //
+  //   await prefs.setString(PrefsString.quoteText, quote.quoteText);
+  //
+  //   await prefs.setString(PrefsString.quoteDate, quote.quoteDate);
+  // }
 
   Future<Response> _getQuote() async {
     return http.get(Uri.parse('$_baseUrlAPI/qotd'));
   }
 
-  Future<void> getQuote() async {
+  Future<Quote> getQuote() async {
     Response? response = await _getQuote();
 
-    if (quote != null) {
-      response = null;
-      return print('no data!');
-    }
+    // if (quote != null) {
+    //   response = null;
+    //   return;
+    // }
 
     if (response.statusCode == 200) {
-      quote = Quote.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      await cacheQuote(quote!);
-      print('data!');
-      notifyListeners();
+      return Quote.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       throw Exception('Failed to load quote');
     }

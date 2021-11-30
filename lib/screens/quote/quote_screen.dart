@@ -1,6 +1,6 @@
 part of quote;
 
-class QuoteScreen extends StatelessWidget {
+class QuoteScreen extends StatefulWidget {
   static const routeName = '/quotes';
 
   const QuoteScreen({Key? key, this.showBackButton = false}) : super(key: key);
@@ -8,30 +8,44 @@ class QuoteScreen extends StatelessWidget {
   final bool showBackButton;
 
   @override
+  State<QuoteScreen> createState() => _QuoteScreenState();
+}
+
+class _QuoteScreenState extends State<QuoteScreen> {
+  late Future<Quote> futureQuote;
+
+  @override
+  void initState() {
+    super.initState();
+    futureQuote = QuotesNetwork().getQuote();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AffirmationAppBar(
+      appBar: const AffirmationAppBar(
         label: 'Quote',
         tag: 'Quote-app-bar',
-        showBackButton: showBackButton,
       ),
-      backgroundColor: const Color(0xff464bbd),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Consumer<QuotesNetwork>(
-                builder: (builder, QuotesNetwork network, _) {
-                  if (network.quote == null) {
-                    print('no data!');
-                    return const CircularProgressIndicator();
-                  } else {
+              FutureBuilder<Quote>(
+                future: futureQuote,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
                     return AffirmationBody(
-                      quote: network.quote!,
+                      quote: snapshot.data!.quoteText,
+                      author: snapshot.data!.quoteAuthor,
                     );
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
                   }
+                  return const CircularProgressIndicator();
                 },
               ),
             ],
@@ -46,43 +60,72 @@ class AffirmationBody extends StatelessWidget {
   const AffirmationBody({
     Key? key,
     required this.quote,
+    required this.author,
   }) : super(key: key);
 
-  final Quote quote;
+  final String quote;
+  final String author;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(12),
-      child: SizedBox(
-        height: 200,
-        width: double.infinity,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: LimitedBox(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              child: Column(
+    return SizedBox(
+      height: 500,
+      width: 400,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Stack(
+            children: [
+              Positioned(
+                right: 20,
+                top: 16,
+                child: Icon(
+                  Icons.star_outline,
+                  color: Theme.of(context).colorScheme.primaryVariant,
+                  size: 50,
+                ),
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '"${quote.quoteText}"',
-                    textAlign: TextAlign.center,
-                    maxLines: 4,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      // color: Colors.white,
+                  Icon(
+                    Icons.format_quote,
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                    size: 70,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, right: 20),
+                    child: Text(
+                      quote,
+                      textAlign: TextAlign.start,
+                      maxLines: 9,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, top: 30),
+                    child: Text(
+                      author,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
