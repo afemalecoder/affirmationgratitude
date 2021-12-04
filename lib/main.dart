@@ -42,27 +42,30 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => QuotesNetwork(),
         ),
       ],
-      child: Consumer<ThemeProvider>(builder: (_, ThemeProvider theme, __) {
-        return MaterialApp(
-          theme: theme.affirmationTheme,
-          home: StreamBuilder<User?>(
-            builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-              return FirebaseAuth.instance.currentUser == null
-                  ? const AuthenticationScreen()
-                  : const AffirmationNavigation();
+      child: Consumer<ThemeProvider>(
+        builder: (_, ThemeProvider theme, __) {
+          return MaterialApp(
+            theme: theme.affirmationTheme,
+            home: StreamBuilder<User?>(
+              builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+                return FirebaseAuth.instance.currentUser == null
+                    ? const AuthenticationScreen()
+                    : const AffirmationNavigation();
+              },
+            ),
+            routes: {
+              AffirmationNavigation.routeName: (context) =>
+                  const AffirmationNavigation(),
+              QuoteScreen.routeName: (context) => const QuoteScreen(),
+              AuthenticationScreen.routeName: (context) =>
+                  const AuthenticationScreen(),
+              AffirmationScreen.routeName: (context) =>
+                  const AffirmationScreen(),
+              HomeScreen.routeName: (context) => const HomeScreen(),
             },
-          ),
-          routes: {
-            AffirmationNavigation.routeName: (context) =>
-                const AffirmationNavigation(),
-            QuoteScreen.routeName: (context) => const QuoteScreen(),
-            AuthenticationScreen.routeName: (context) =>
-                const AuthenticationScreen(),
-            AffirmationScreen.routeName: (context) => const AffirmationScreen(),
-            HomeScreen.routeName: (context) => const HomeScreen(),
-          },
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
