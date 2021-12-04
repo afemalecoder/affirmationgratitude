@@ -3,13 +3,14 @@ part of theme;
 class ThemeProvider with ChangeNotifier {
   ThemeProvider() {
     _getThemeMood().then((bool value) async {
-      if (!value) {
-        _isDarkTheme = value;
-        _currentTheme = lightThemeData;
-      } else {
+      if (value) {
         _isDarkTheme = value;
         _currentTheme = darkThemeData;
+        notifyListeners();
+        return;
       }
+      _isDarkTheme = value;
+      _currentTheme = lightThemeData;
       notifyListeners();
     });
   }
