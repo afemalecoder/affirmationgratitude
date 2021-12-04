@@ -29,26 +29,20 @@ class _QuoteScreenState extends State<QuoteScreen> {
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FutureBuilder<Quote>(
-                future: futureQuote,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return QuoteBody(
-                      quote: snapshot.data!.quoteText,
-                      author: snapshot.data!.quoteAuthor,
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return const CircularProgressIndicator();
-                },
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: FutureBuilder<Quote>(
+            future: futureQuote,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return QuoteBody(
+                  quote: snapshot.data!.quoteText,
+                  author: snapshot.data!.quoteAuthor,
+                );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+              return const CircularProgressIndicator();
+            },
           ),
         ),
       ),
@@ -68,9 +62,8 @@ class QuoteBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
-      width: 400,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -92,13 +85,17 @@ class QuoteBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 50),
                   Icon(
                     Icons.format_quote,
                     color: Theme.of(context).colorScheme.primaryVariant,
                     size: 70,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 20),
+                    padding: const EdgeInsets.only(
+                      left: 50,
+                      right: 20,
+                    ),
                     child: Text(
                       quote,
                       textAlign: TextAlign.start,
@@ -108,18 +105,18 @@ class QuoteBody extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 30),
+                    padding: const EdgeInsets.only(left: 50, top: 30, bottom: 20),
                     child: Text(
-                      author,
+                      '- $author',
                       style: TextStyle(
-                        fontSize: 20,
+
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.primaryVariant,
                       ),
                     ),
                   ),
