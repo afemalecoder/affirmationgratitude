@@ -12,6 +12,7 @@ class QuoteScreen extends StatefulWidget {
 }
 
 class _QuoteScreenState extends State<QuoteScreen> {
+
   late Future<Quote> futureQuote;
 
   @override
@@ -23,9 +24,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AffirmationAppBar(
+      appBar: AffirmationAppBar(
         label: 'Quote',
         tag: 'Quote-app-bar',
+        showBackButton: widget.showBackButton,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
