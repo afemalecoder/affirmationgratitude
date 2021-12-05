@@ -110,7 +110,7 @@ class _AffirmationBottomSheetBodyState
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w900,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                       ),
                       Row(
@@ -133,13 +133,16 @@ class _AffirmationBottomSheetBodyState
                         Text(
                           'Add your affirmation',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             fontWeight: FontWeight.w900,
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                           autofocus: true,
                           minLines: 4,
                           maxLines: 12,
@@ -168,7 +171,7 @@ class _AffirmationBottomSheetBodyState
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: disableButton() ? null : submitData,
-                          child: const Text('add'),
+                          child: const Text('ADD'),
                         ),
                       ],
                     ),
@@ -201,36 +204,40 @@ class AffirmationMood extends StatelessWidget {
         : const Duration(milliseconds: 500);
   }
 
-  Color? selectionBackground(BuildContext context) {
-    return isSelected ? Theme.of(context).colorScheme.secondaryVariant : null;
+  Color? selectionIconColor(BuildContext context) {
+    return isSelected
+        ? Theme.of(context).colorScheme.surface
+        : const Color(0xFFFFFFFF);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashFactory: NoSplash.splashFactory,
+      highlightColor: Colors.transparent,
       onTap: onTap,
       child: AnimatedContainer(
         height: 70,
         width: 70,
         duration: colorSwitchingDuration(),
-        decoration: ShapeDecoration(
-          shape: const CircleBorder(),
-          color: selectionBackground(context),
-        ),
+        // decoration: ShapeDecoration(
+        //   shape: const CircleBorder(),
+        //   color: selectionBackground(context),
+        // ),
         child: Center(
           child: Column(
             children: [
               Icon(
                 MoodHelper.mood(label).icon,
                 size: 40,
-                color: Theme.of(context).colorScheme.primary,
+                color: selectionIconColor(context),
               ),
               Text(
                 MoodHelper.mood(label).label,
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: selectionIconColor(context),
                 ),
               ),
             ],
