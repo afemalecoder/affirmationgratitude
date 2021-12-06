@@ -29,4 +29,10 @@ class AffirmationNetwork extends ChangeNotifier {
       'mood': mood,
     });
   }
+  Future<void> deleteAffirmation(String id) async{
+    final String userAffirmationsPath =
+        'affirmations/${_firebaseUser.uid}/affirmations';
+
+    await _db.collection(userAffirmationsPath).doc(id).delete();
+  }
 }
