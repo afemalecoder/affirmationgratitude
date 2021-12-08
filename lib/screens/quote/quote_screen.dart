@@ -13,12 +13,15 @@ class QuoteScreen extends StatefulWidget {
 
 class _QuoteScreenState extends State<QuoteScreen> {
 
-  late Future<Quote> futureQuote;
+Future<void> _getQuote() async{
+ await context.read<QuotesNetwork>().getQuote();
+}
+
 
   @override
   void initState() {
+   _getQuote();
     super.initState();
-    futureQuote = QuotesNetwork().getQuote();
   }
 
   @override
@@ -32,18 +35,15 @@ class _QuoteScreenState extends State<QuoteScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: SingleChildScrollView(
-          child: FutureBuilder<Quote>(
-            future: futureQuote,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
+          child: Consumer<QuotesNetwork>(
+            builder: (builder, QuotesNetwork network, _) {
+              if (network.quote == null) {
+                return const CircularProgressIndicator();
+              } else {
                 return QuoteBody(
-                  quote: snapshot.data!.quoteText,
-                  author: snapshot.data!.quoteAuthor,
+                  quote: network.quote!,
                 );
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
               }
-              return const CircularProgressIndicator();
             },
           ),
         ),
@@ -56,14 +56,15 @@ class QuoteBody extends StatelessWidget {
   const QuoteBody({
     Key? key,
     required this.quote,
-    required this.author,
   }) : super(key: key);
 
-  final String quote;
-  final String author;
+  final Quote quote;
+
 
   @override
   Widget build(BuildContext context) {
+    final String _quoteBody =  quote.quote['body'] as String;
+    final String _author =  quote.quote['author'] as String;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Card(
@@ -99,7 +100,7 @@ class QuoteBody extends StatelessWidget {
                       right: 20,
                     ),
                     child: Text(
-                      quote,
+                      _quoteBody,
                       textAlign: TextAlign.start,
                       maxLines: 9,
                       softWrap: true,
@@ -114,7 +115,7 @@ class QuoteBody extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50, top: 30, bottom: 20),
                     child: Text(
-                      '- $author',
+                      '- $_author',
                       style: TextStyle(
 
                         fontWeight: FontWeight.bold,
