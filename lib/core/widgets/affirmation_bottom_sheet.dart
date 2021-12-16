@@ -220,10 +220,6 @@ class AffirmationMood extends StatelessWidget {
         height: 70,
         width: 70,
         duration: colorSwitchingDuration(),
-        // decoration: ShapeDecoration(
-        //   shape: const CircleBorder(),
-        //   color: selectionBackground(context),
-        // ),
         child: Center(
           child: Column(
             children: [
