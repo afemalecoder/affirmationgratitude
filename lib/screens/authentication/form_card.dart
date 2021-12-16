@@ -90,20 +90,29 @@ class __FormCardState extends State<_FormCard> {
     return Flexible(
       flex: screenWidth(context) > 600 ? 2 : 1,
       child: Card(
+        color: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         elevation: 8.0,
         child: Container(
-          height: isLogin ? 320 : 260,
-          constraints: BoxConstraints(minHeight: isLogin ? 320 : 260),
+          height: isLogin ? 400 : 400,
+          constraints: BoxConstraints(minHeight: isLogin ? 400 : 400),
           width: screenWidth(context) * 0.75,
-          padding: const EdgeInsets.all(16.00),
+          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Text(
+                    'Welcome to Affirtude',
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                   if (!isLogin)
                     TextFormField(
                       decoration: const InputDecoration(
@@ -161,26 +170,26 @@ class __FormCardState extends State<_FormCard> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0,
-                          vertical: 8.0,
+                          horizontal: 60.0,
+                          vertical: 10.0,
                         ),
                         primary: Theme.of(context).primaryColor,
                       ),
                       onPressed: _submit,
                       child: Text(isLogin ? 'LOGIN' : 'SIGN UP'),
                     ),
+                 const SizedBox(height: 10),
                   TextButton(
                     onPressed: toggleAuthMode,
                     style: TextButton.styleFrom(
+                      primary: Theme.of(context).colorScheme.onSurface,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30.0,
                         vertical: 4.0,
                       ),
-                      textStyle:
-                          TextStyle(color: Theme.of(context).primaryColor),
                     ),
                     child: Text('${isLogin ? 'SIGN UP' : 'LOGIN'} INSTEAD'),
                   ),

@@ -6,3 +6,7 @@ class PrefsString {
   static const String quote = 'quote';
   static const String lastUpdated = 'last_updated';
 }
+class PrefsBool{
+  const PrefsBool._();
+  static const bool isSelected = true;
+}

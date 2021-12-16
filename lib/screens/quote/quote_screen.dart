@@ -12,15 +12,13 @@ class QuoteScreen extends StatefulWidget {
 }
 
 class _QuoteScreenState extends State<QuoteScreen> {
-
-Future<void> _getQuote() async{
- await context.read<QuotesNetwork>().getQuote();
-}
-
+  Future<void> _getQuote() async {
+    await context.read<QuotesNetwork>().getQuote();
+  }
 
   @override
   void initState() {
-   _getQuote();
+    _getQuote();
     super.initState();
   }
 
@@ -42,6 +40,7 @@ Future<void> _getQuote() async{
               } else {
                 return QuoteBody(
                   quote: network.quote!,
+                  //isSelected: network.isSelected!,
                 );
               }
             },
@@ -52,19 +51,28 @@ Future<void> _getQuote() async{
   }
 }
 
-class QuoteBody extends StatelessWidget {
+class QuoteBody extends StatefulWidget {
   const QuoteBody({
     Key? key,
     required this.quote,
+    //required this.isSelected,
   }) : super(key: key);
 
   final Quote quote;
+  //final bool isSelected;
 
+  @override
+  State<QuoteBody> createState() => _QuoteBodyState();
+}
+
+class _QuoteBodyState extends State<QuoteBody> {
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
-    final String _quoteBody =  quote.quote['body'] as String;
-    final String _author =  quote.quote['author'] as String;
+    final String _quoteBody = widget.quote.quote['body'] as String;
+    final String _author = widget.quote.quote['author'] as String;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Card(
@@ -78,10 +86,19 @@ class QuoteBody extends StatelessWidget {
               Positioned(
                 right: 20,
                 top: 16,
-                child: Icon(
-                  Icons.star_outline,
-                  color: Theme.of(context).colorScheme.primaryVariant,
-                  size: 50,
+                child: IconButton(
+                  icon: Icon(isSelected ? Icons.star : Icons.star_outline),
+                  onPressed: () async {
+                    // await context.read<AffirmationNetwork>().addQuote(
+                    //       date: DateTime.now().toString(),
+                    //       author: _author,
+                    //       quote: _quoteBody,
+                    //     );
+                    setState(() {
+                      isSelected = true;
+                      //if _shouldUpdateQuote is true
+                    });
+                  },
                 ),
               ),
               Column(
@@ -113,11 +130,11 @@ class QuoteBody extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 30, bottom: 20),
+                    padding:
+                        const EdgeInsets.only(left: 50, top: 30, bottom: 20),
                     child: Text(
                       '- $_author',
                       style: TextStyle(
-
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.primaryVariant,
                       ),

@@ -12,6 +12,7 @@ class QuotesNetwork with ChangeNotifier {
   QuotesNetwork();
 
   Quote? quote;
+  bool? isSelected;
 
   final String _baseUrlAPI = 'https://favqs.com/api';
 
@@ -50,10 +51,16 @@ class QuotesNetwork with ChangeNotifier {
       }
 
       quote = await getCachedQuote();
+      isSelected = await getCachedFavouredQuote();
       notifyListeners();
     } else {
       throw Exception('Failed to load quote');
     }
+  }
+
+  Future<bool?> getCachedFavouredQuote() async {
+    final SharedPreferences prefs =  await SharedPreferences.getInstance();
+
   }
 
   Future<Quote?> getCachedQuote() async {
@@ -79,8 +86,15 @@ class QuotesNetwork with ChangeNotifier {
 
   bool _shouldUpdateQuote(DateTime lastUpdated) {
     final DateTime now = DateTime.now();
+    final Duration hoursMinutesSeconds = Duration(
+      hours: now.hour,
+      minutes: now.minute,
+      seconds: now.second,
+      milliseconds: now.millisecond,
+    );
+    final DateTime date = now.subtract(hoursMinutesSeconds);
 
-    return lastUpdated.isBefore(now.subtract(const Duration(hours: 12)));
+    return lastUpdated.isBefore(date);
   }
 
   void _addLastUpdatedDate(Map<String, dynamic> _quote) {

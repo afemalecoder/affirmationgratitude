@@ -85,7 +85,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   SettingOption(
                     title: settingTitles[0],
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const MyQuoteScreen(),
+                        ),
+                      );
+                    },
                   ),
                   Consumer<ThemeProvider>(
                     builder: (context, ThemeProvider theme, _) {

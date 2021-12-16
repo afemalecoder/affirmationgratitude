@@ -4,6 +4,7 @@ import 'package:affirmation_gratitude/core/theme/theme.dart';
 import 'package:affirmation_gratitude/screens/affirmation/affirmation.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
 import 'package:affirmation_gratitude/screens/home/home.dart';
+import 'package:affirmation_gratitude/screens/myQuote/my_quote_screen.dart';
 import 'package:affirmation_gratitude/screens/quote/quote.dart';
 import 'package:affirmation_gratitude/services/affirmation_auth.dart';
 import 'package:affirmation_gratitude/services/affirmation_network.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
               AffirmationScreen.routeName: (context) =>
                   const AffirmationScreen(),
               HomeScreen.routeName: (context) => const HomeScreen(),
+              MyQuoteScreen.routeName: (context) => const MyQuoteScreen(),
             },
           );
         },
