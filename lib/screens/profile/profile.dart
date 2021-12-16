@@ -3,6 +3,7 @@ library profile;
 import 'package:affirmation_gratitude/core/theme/theme.dart';
 import 'package:affirmation_gratitude/core/widgets/affirmation_app_bar.dart';
 import 'package:affirmation_gratitude/screens/authentication/authentication.dart';
+import 'package:affirmation_gratitude/screens/myQuote/my_quote_screen.dart';
 import 'package:affirmation_gratitude/services/affirmation_auth.dart';
 import 'package:affirmation_gratitude/services/affirmation_network.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
