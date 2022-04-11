@@ -87,6 +87,7 @@ class _QuoteBodyState extends State<QuoteBody> {
                 right: 20,
                 top: 16,
                 child: IconButton(
+                  color: Colors.white,
                   icon: Icon(isSelected ? Icons.star : Icons.star_outline),
                   onPressed: () async {
                     // await context.read<AffirmationNetwork>().addQuote(
@@ -122,10 +123,10 @@ class _QuoteBodyState extends State<QuoteBody> {
                       maxLines: 9,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Colors.white,
                       ),
                     ),
                   ),
