@@ -1,6 +1,6 @@
 part of affirmation;
 
-class AffirmationScreen extends StatelessWidget {
+class AffirmationScreen extends StatefulWidget {
   const AffirmationScreen({Key? key, this.showBackButton = false})
       : super(key: key);
 
@@ -9,13 +9,18 @@ class AffirmationScreen extends StatelessWidget {
   static const routeName = '/affirmation';
 
   @override
+  State<AffirmationScreen> createState() => _AffirmationScreenState();
+}
+
+class _AffirmationScreenState extends State<AffirmationScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AffirmationAppBar(
         label: 'Affirmation',
         tag: 'Affirmation-app-bar',
-        showBackButton: showBackButton,
+        showBackButton: widget.showBackButton,
       ),
       body: StreamBuilder<QuerySnapshot<Object?>>(
         stream: context.watch<AffirmationNetwork>().watchAffirmations(),
@@ -23,11 +28,11 @@ class AffirmationScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
           }
-          if (!snapshot.hasData) {
-            return const Center(child: Text('You have no Affirmation 🥲'));
-          }
           if (snapshot.hasError) {
             return const Center(child: Text('Oh no! Something went wrong'));
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('You have no Affirmation 🥲'));
           } else {
             final List<QueryDocumentSnapshot<Object?>> _docs =
                 snapshot.data!.docs.reversed.toList();
@@ -39,9 +44,13 @@ class AffirmationScreen extends StatelessWidget {
                 final QueryDocumentSnapshot<Object?> _doc = _docs[i];
                 final Affirmation _affirmation =
                     Affirmation.fromJson(_doc.data()! as Map<String, dynamic>);
-                return AffirmationCard(
-                  _affirmation,
-                  key: Key(_doc.id),
+                return Builder(
+                  builder: (context) {
+                    return AffirmationCard(
+                      _affirmation,
+                      key: Key(_doc.id),
+                    );
+                  },
                 );
               },
             );

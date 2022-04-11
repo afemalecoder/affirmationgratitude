@@ -1,6 +1,6 @@
 part of quote;
 
-class QuoteScreen extends StatelessWidget {
+class QuoteScreen extends StatefulWidget {
   static const routeName = '/quotes';
 
   const QuoteScreen({Key? key, this.showBackButton = false}) : super(key: key);
@@ -8,33 +8,42 @@ class QuoteScreen extends StatelessWidget {
   final bool showBackButton;
 
   @override
+  State<QuoteScreen> createState() => _QuoteScreenState();
+}
+
+class _QuoteScreenState extends State<QuoteScreen> {
+  Future<void> _getQuote() async {
+    await context.read<QuotesNetwork>().getQuote();
+  }
+
+  @override
+  void initState() {
+    _getQuote();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AffirmationAppBar(
         label: 'Quote',
         tag: 'Quote-app-bar',
-        showBackButton: showBackButton,
+        showBackButton: widget.showBackButton,
       ),
-      backgroundColor: const Color(0xff464bbd),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Consumer<QuotesNetwork>(
-                builder: (builder, QuotesNetwork network, _) {
-                  if (network.quote == null) {
-                    return const CircularProgressIndicator();
-                  } else {
-                    return AffirmationBody(
-                      quote: network.quote!,
-                    );
-                  }
-                },
-              ),
-              const AddButton(),
-            ],
+        child: SingleChildScrollView(
+          child: Consumer<QuotesNetwork>(
+            builder: (builder, QuotesNetwork network, _) {
+              if (network.quote == null) {
+                return const CircularProgressIndicator();
+              } else {
+                return QuoteBody(
+                  quote: network.quote!,
+                  //isSelected: network.isSelected!,
+                );
+              }
+            },
           ),
         ),
       ),
@@ -42,76 +51,99 @@ class QuoteScreen extends StatelessWidget {
   }
 }
 
-class AffirmationBody extends StatelessWidget {
-  const AffirmationBody({
+class QuoteBody extends StatefulWidget {
+  const QuoteBody({
     Key? key,
     required this.quote,
+    //required this.isSelected,
   }) : super(key: key);
 
   final Quote quote;
+  //final bool isSelected;
+
+  @override
+  State<QuoteBody> createState() => _QuoteBodyState();
+}
+
+class _QuoteBodyState extends State<QuoteBody> {
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(12),
-      child: SizedBox(
-        height: 200,
-        width: double.infinity,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: LimitedBox(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              child: Column(
+    final String _quoteBody = widget.quote.quote['body'] as String;
+    final String _author = widget.quote.quote['author'] as String;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Stack(
+            children: [
+              Positioned(
+                right: 20,
+                top: 16,
+                child: IconButton(
+                  icon: Icon(isSelected ? Icons.star : Icons.star_outline),
+                  onPressed: () async {
+                    // await context.read<AffirmationNetwork>().addQuote(
+                    //       date: DateTime.now().toString(),
+                    //       author: _author,
+                    //       quote: _quoteBody,
+                    //     );
+                    setState(() {
+                      isSelected = true;
+                      //if _shouldUpdateQuote is true
+                    });
+                  },
+                ),
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '"${quote.quoteText}"',
-                    textAlign: TextAlign.center,
-                    maxLines: 4,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      // color: Colors.white,
+                  const SizedBox(height: 50),
+                  Icon(
+                    Icons.format_quote,
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                    size: 70,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50,
+                      right: 20,
+                    ),
+                    child: Text(
+                      _quoteBody,
+                      textAlign: TextAlign.start,
+                      maxLines: 9,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 50, top: 30, bottom: 20),
+                    child: Text(
+                      '- $_author',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primaryVariant,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AddButton extends StatelessWidget {
-  const AddButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 100, bottom: 20),
-      child: TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(5),
-            ),
-          ),
-        ),
-        onPressed: () => Navigator.pushNamed(context, AddNoteScreen.routeName),
-        child: const Text(
-          'New affirmation',
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

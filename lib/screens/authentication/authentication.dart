@@ -9,6 +9,5 @@ import 'package:provider/provider.dart';
 
 part 'app_logo.dart';
 part 'authentication_screen.dart';
-part 'background.dart';
 part 'form_card.dart';
 part 'form_wrapper.dart';

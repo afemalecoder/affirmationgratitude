@@ -9,12 +9,12 @@ class AuthenticationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     deviceSize(context);
     return Scaffold(
+      appBar: const AppBarCard(),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(
         children: const <Widget>[
-          AuthBackground(),
           AuthFormWrapper(
             children: <Widget>[
-              AppLogo(),
               _FormCard(),
               SizedBox(height: 140),
             ],

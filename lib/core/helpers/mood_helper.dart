@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MoodHelper {
   const MoodHelper();
 
-  static const excited = 'excited';
+  static const excited = 'Excited';
   static const happy = 'Happy';
   static const neutral = 'Neutral';
   static const sad = 'Sad';
@@ -16,9 +16,9 @@ class MoodHelper {
     Mood(label: sad, icon: Icons.mood_bad),
   ];
 
-  IconData getIcon(String label) {
+  static Mood mood(String label) {
     return moods.firstWhere((Mood mood) {
       return mood.label == label;
-    }).icon;
+    });
   }
 }

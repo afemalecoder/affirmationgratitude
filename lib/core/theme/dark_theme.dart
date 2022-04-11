@@ -7,7 +7,7 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
     cursorColor: Color.fromRGBO(255, 255, 255, 1.0),
   ),
   errorColor: const Color.fromRGBO(207, 102, 121, 1.0),
-  indicatorColor: const Color.fromRGBO(77, 182, 172, 1.0),
+  indicatorColor: const Color.fromRGBO(51, 57, 102, 1.0),
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
     primary: Color.fromRGBO(193, 200, 255, 1.0),
